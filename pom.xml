@@ -50,6 +50,29 @@
                     <configLocation>config/sun_checks.xml</configLocation>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.9.1</version>
+                <configuration>
+                    <charset>UTF-8</charset>
+                    <docencoding>UTF-8</docencoding>
+                    <docfilessubdirs>true</docfilessubdirs>
+                    <links>
+                        <link>http://java.sun.com/j2se/1.8.0/docs/api/</link>
+                    </links>
+                    <show>protected</show>
+                    <source>1.8</source>
+                    <sourcepath>${basedir}/src/main/java/pl/hotel/</sourcepath>
+                </configuration>
+                <reportSets>
+                    <reportSet>
+                        <reports>
+                            <report>javadoc</report>
+                        </reports>
+                    </reportSet>
+                </reportSets>
+            </plugin>
         </plugins>
     </reporting>
 </project>

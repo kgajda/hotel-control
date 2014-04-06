@@ -6,6 +6,7 @@
         <artifactId>hotel-control</artifactId>
         <version>1.0</version>
     </parent>
+    <name>DataBase - Connector</name>
     <artifactId>database-connector</artifactId>
     <packaging>jar</packaging>
     <dependencies>
