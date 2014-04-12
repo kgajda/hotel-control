@@ -1,0 +1,91 @@
+/* 
+    Created on : Apr 12, 2014, 8:25:33 AM
+    Author     : karol
+*/
+body{
+    background-color: appworkspace;
+    margin:0px;
+    padding:0px;
+    height:100%;
+    overflow:hidden;
+}
+/*.page {
+    min-height:100%;
+    position:relative;
+}
+
+.header {
+    padding:10px;
+    width:100%;
+    text-align:center;
+}
+
+.content {
+    padding:10px;
+    padding-bottom:20px;  Height of the footer element 
+    overflow:hidden;
+}*/
+
+.menu {
+    padding:50px 10px 0px 10px;
+    width:200px;
+    float:left;
+}
+.button {
+    -moz-box-shadow:inset 4px 1px 7px -19px #ba55a4;
+    -webkit-box-shadow:inset 4px 1px 7px -19px #ba55a4;
+    box-shadow:inset 4px 1px 7px -19px #ba55a4;
+    background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #9dce2c), color-stop(1, #8cb82b) );
+    background:-moz-linear-gradient( center top, #9dce2c 5%, #8cb82b 100% );
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#9dce2c', endColorstr='#8cb82b');
+    background-color:#9dce2c;
+    -webkit-border-top-left-radius:27px;
+    -moz-border-radius-topleft:27px;
+    border-top-left-radius:27px;
+    -webkit-border-top-right-radius:27px;
+    -moz-border-radius-topright:27px;
+    border-top-right-radius:27px;
+    -webkit-border-bottom-right-radius:27px;
+    -moz-border-radius-bottomright:27px;
+    border-bottom-right-radius:27px;
+    -webkit-border-bottom-left-radius:27px;
+    -moz-border-radius-bottomleft:27px;
+    border-bottom-left-radius:27px;
+    text-indent:0;
+    border:1px solid #83c41a;
+    display:inline-block;
+    color:#ffffff;
+    font-family:Arial Black;
+    font-size:18px;
+    font-weight:bold;
+    font-style:italic;
+    height:49px;
+    line-height:49px;
+    width:100px;
+    text-decoration:none;
+    text-align:center;
+    text-shadow:1px 1px 0px #689324;
+}
+.button:hover {
+    background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #8cb82b), color-stop(1, #9dce2c) );
+    background:-moz-linear-gradient( center top, #8cb82b 5%, #9dce2c 100% );
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#8cb82b', endColorstr='#9dce2c');
+    background-color:#8cb82b;
+}.button:active {
+    position:relative;
+    top:1px;
+}
+.body {
+    margin:50px 10px 0px 250px;
+}
+/*
+.footer {
+    clear:both;
+    position:absolute;
+    bottom:0;
+    left:0;
+    text-align:center;
+    width:100%;
+    height:20px;
+}*/
+

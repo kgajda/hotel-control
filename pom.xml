@@ -12,12 +12,13 @@
         </mailingList>
     </mailingLists> 
     <scm>
-        <url></url>
+        <url/>
     </scm>
     <packaging>pom</packaging>
     <modules>
         <module>database-connector</module>
-    </modules>
+    <module>Hotel-WebPage</module>
+  </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
