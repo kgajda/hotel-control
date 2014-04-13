@@ -19,7 +19,7 @@ public class App {
     public static void main(String[] args) {
 
         ApplicationContext ac = new AnnotationConfigApplicationContext(SpringConfig.class);
-//        ApplicationContext ac = new ClassPathXmlApplicationContext("SpringConfig.xml");
-
+        MyTest test = ac.getBean(MyTest.class);
+        test.insert();
     }
 }

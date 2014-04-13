@@ -24,7 +24,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  * @author karol
  */
 @Configuration
-@ComponentScan(basePackages = "pl.hotel.database.connector")
+@ComponentScan("pl.hotel.database.connector")
 @PropertySource(value = {"classpath:/jdbc.properties", "classpath:/Hibernate.properties"})
 @EnableTransactionManagement
 public class SpringConfig {
@@ -44,11 +44,11 @@ public class SpringConfig {
 
     @Bean
     org.springframework.orm.hibernate4.LocalSessionFactoryBean localSessionFactoryBean() {
-        LocalSessionFactoryBean localSessionFactoryBean = new LocalSessionFactoryBean();
-        localSessionFactoryBean.setDataSource(basicDataSource());
-        localSessionFactoryBean.setHibernateProperties(getHibernateProperties());
-        localSessionFactoryBean.setPackagesToScan(new String[]{"pl.hotel.control.database.connector.orm"});
-        return localSessionFactoryBean;
+        LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
+        sessionFactory.setDataSource(basicDataSource());
+        sessionFactory.setHibernateProperties(getHibernateProperties());
+        sessionFactory.setPackagesToScan(new String[]{"pl.hotel.control.database.connector.orm"});
+        return sessionFactory;
     }
 
     @Bean
@@ -70,8 +70,6 @@ public class SpringConfig {
         hibernateProperties.setProperty("hibernate.show_sql", environment.getProperty("hibernate.show_sql"));
         hibernateProperties.setProperty("hibernate.current_session_context_class", environment.getProperty("hibernate.current_session_context_class"));
         hibernateProperties.setProperty("hibernate.connection.useUnicode", environment.getProperty("hibernate.connection.useUnicode"));
-        System.out.println("############################");
-        System.out.println(environment.getProperty("hibernate.dialect"));
         return hibernateProperties;
     }
 }
