@@ -39,9 +39,9 @@ public class AccountDOAImpl extends CustomHibernateDaoSupport implements Account
 
     @Transactional
     @Override
-    public Account findByStockCode(String stockCode) {
+    public Account findByName(String name) {
         List list = getHibernateTemplate().find(
-                "from Stock where stockCode=?", stockCode
+                "from ACCOUNT where name=?", name
         );
         return (Account) list.get(0);
     }

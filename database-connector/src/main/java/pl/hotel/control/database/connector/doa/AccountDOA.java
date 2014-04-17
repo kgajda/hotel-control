@@ -19,6 +19,6 @@ public interface AccountDOA {
 
     void delete(Account stock);
 
-    Account findByStockCode(String stockCode);
+    Account findByName(String name);
 
 }

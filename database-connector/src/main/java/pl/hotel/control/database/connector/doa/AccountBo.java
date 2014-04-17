@@ -32,7 +32,7 @@ public class AccountBo {
         accountDOA.delete(stock);
     }
 
-    public Account findByStockCode(String stockCode) {
-        return accountDOA.findByStockCode(stockCode);
+    public Account findByName(String name) {
+        return accountDOA.findByName(name);
     }
 }
