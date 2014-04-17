@@ -7,6 +7,7 @@ package pl.hotel.control.database.connector;
 
 import java.util.Properties;
 import org.apache.commons.dbcp.BasicDataSource;
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -14,6 +15,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
+import org.springframework.orm.hibernate4.HibernateExceptionTranslator;
 import org.springframework.orm.hibernate4.HibernateTransactionManager;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
@@ -24,7 +26,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  * @author karol
  */
 @Configuration
-@ComponentScan("pl.hotel.database.connector")
+@ComponentScan(basePackages = {"pl.hotel.database.connector","pl.hotel.control.database.connector.doa"})
 @PropertySource(value = {"classpath:/jdbc.properties", "classpath:/Hibernate.properties"})
 @EnableTransactionManagement
 public class SpringConfig {
@@ -33,7 +35,7 @@ public class SpringConfig {
     private Environment environment;
 
     @Bean(destroyMethod = "close")
-    org.apache.commons.dbcp.BasicDataSource basicDataSource() {
+    public BasicDataSource basicDataSource() {
         BasicDataSource basicDataSource = new BasicDataSource();
         basicDataSource.setDriverClassName("org.postgresql.Driver");
         basicDataSource.setUsername(environment.getProperty("jdbc.username"));
@@ -43,7 +45,7 @@ public class SpringConfig {
     }
 
     @Bean
-    org.springframework.orm.hibernate4.LocalSessionFactoryBean localSessionFactoryBean() {
+    public LocalSessionFactoryBean localSessionFactoryBean() {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
         sessionFactory.setDataSource(basicDataSource());
         sessionFactory.setHibernateProperties(getHibernateProperties());
@@ -52,7 +54,7 @@ public class SpringConfig {
     }
 
     @Bean
-    org.springframework.orm.hibernate4.HibernateTransactionManager hibernateTransactionManager() {
+    public HibernateTransactionManager hibernateTransactionManager() {
         HibernateTransactionManager txManager = new HibernateTransactionManager();
         txManager.setSessionFactory(localSessionFactoryBean().getObject());
         return txManager;
@@ -62,13 +64,17 @@ public class SpringConfig {
     public PersistenceExceptionTranslationPostProcessor exceptionTranslation() {
         return new PersistenceExceptionTranslationPostProcessor();
     }
+     @Bean 
+    public HibernateExceptionTranslator hibernateExceptionTranslator(){ 
+      return new HibernateExceptionTranslator(); 
+    }
 
     Properties getHibernateProperties() {
         Properties hibernateProperties = new Properties();
         hibernateProperties.setProperty("hibernate.dialect", environment.getProperty("hibernate.dialect"));
         hibernateProperties.setProperty("hibernate.hbm2ddl.auto", environment.getProperty("hibernate.hbm2ddl.auto"));
         hibernateProperties.setProperty("hibernate.show_sql", environment.getProperty("hibernate.show_sql"));
-        hibernateProperties.setProperty("hibernate.current_session_context_class", environment.getProperty("hibernate.current_session_context_class"));
+//        hibernateProperties.setProperty("hibernate.current_session_context_class", environment.getProperty("hibernate.current_session_context_class"));
         hibernateProperties.setProperty("hibernate.connection.useUnicode", environment.getProperty("hibernate.connection.useUnicode"));
         return hibernateProperties;
     }

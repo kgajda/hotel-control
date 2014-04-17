@@ -6,11 +6,19 @@
 package pl.hotel.control.database.connector.orm;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -23,7 +31,7 @@ import javax.persistence.Table;
 public class Account implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "ACCOUNT_ID")
     private int id;
     @Column(name = "LOGIN", length = 30, nullable = false)
@@ -34,6 +42,10 @@ public class Account implements Serializable {
     private String email;
     @Column(name = "ACTIVE", length = 1, nullable = false)
     private boolean active;
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private UserInfo userInfo;
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<Reservation> stockDailyRecords = new HashSet<>(0);
 
     public Account() {
     }
@@ -83,6 +95,22 @@ public class Account implements Serializable {
 
     public void setActive(boolean active) {
         this.active = active;
+    }
+
+    public UserInfo getUserInfo() {
+        return userInfo;
+    }
+
+    public void setUserInfo(UserInfo userInfo) {
+        this.userInfo = userInfo;
+    }
+
+    public Set<Reservation> getStockDailyRecords() {
+        return stockDailyRecords;
+    }
+
+    public void setStockDailyRecords(Set<Reservation> stockDailyRecords) {
+        this.stockDailyRecords = stockDailyRecords;
     }
 
 }

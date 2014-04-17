@@ -7,10 +7,14 @@ package pl.hotel.control.database.connector.orm;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 
@@ -23,7 +27,7 @@ import javax.persistence.Temporal;
 public class Reservation implements Serializable {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "RESERVATION_ID")
     private int id;
 
@@ -35,10 +39,13 @@ public class Reservation implements Serializable {
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date date_to;
 
+    @OneToMany
+    private Set<Hotel> hotels = new HashSet<>();
+
     public Reservation() {
     }
 
-    public Reservation(int id, Date date_from, Date date_to) {
+    public Reservation(Date date_from, Date date_to) {
         this.date_from = date_from;
         this.date_to = date_to;
     }
@@ -65,6 +72,14 @@ public class Reservation implements Serializable {
 
     public void setDate_to(Date date_to) {
         this.date_to = date_to;
+    }
+
+    public Set<Hotel> getHotels() {
+        return hotels;
+    }
+
+    public void setHotels(Set<Hotel> hotels) {
+        this.hotels = hotels;
     }
 
 }

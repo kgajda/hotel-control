@@ -27,6 +27,8 @@ public class Hotel implements Serializable {
 
     @Column(name = "CITY")
     private String city;
+    
+    
 
     public Hotel() {
     }
