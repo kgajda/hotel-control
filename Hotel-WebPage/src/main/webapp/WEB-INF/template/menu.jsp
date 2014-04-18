@@ -9,5 +9,9 @@
             <spring:url value="/login" var="aboutUrl" htmlEscape="true"/>
             <a class="button" href="${aboutUrl}">Logowanie</a>
         </li>
+        <li class="button">
+            <spring:url value="/registion" var="aboutUrl" htmlEscape="true"/>
+            <a class="button" href="${aboutUrl}">Rejestracja</a>
+        </li>
     </ul>
 </div>

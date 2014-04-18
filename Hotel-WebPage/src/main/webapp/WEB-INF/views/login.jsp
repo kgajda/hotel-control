@@ -2,8 +2,8 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="spring" %>
 <tiles:insertDefinition name="defaultTemplate">
     <tiles:putAttribute name="body">
-<!--        <div class="body">
-            <spring:form method="POST" modelAttribute="login">
+        <div class="body">
+            <spring:form method="POST" modelAttribute="loginModel">
                 <table>
                     <tr>
                         <td>Login</td>
@@ -11,10 +11,11 @@
                     </tr>
                     <tr>
                         <td>Password</td>
-                        <td><spring:password path="pass" size="20" id="pass" showPassword="true"  /></td>
+                        <td><spring:password path="password" size="20" id="pass" showPassword="true"  /></td>
                     </tr>
                 </table>
+                    <input class="button" type="submit" value="Send" />
             </spring:form>
-        </div>-->
+        </div>
     </tiles:putAttribute>
 </tiles:insertDefinition>
