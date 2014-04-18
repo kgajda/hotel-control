@@ -7,6 +7,7 @@
         <version>1.0</version>
     </parent>
     <name>DataBase - Connector</name>
+    <groupId>pl.hotel.control</groupId>
     <artifactId>database-connector</artifactId>
     <packaging>jar</packaging>
     <dependencies>

@@ -26,10 +26,10 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  * @author karol
  */
 @Configuration
-@ComponentScan(basePackages = {"pl.hotel.database.connector","pl.hotel.control.database.connector.doa"})
+@ComponentScan(basePackages = {"pl.hotel.database.connector","pl.hotel.control.database.connector.doa","pl.hotel.control.database.connector.service"})
 @PropertySource(value = {"classpath:/jdbc.properties", "classpath:/Hibernate.properties"})
 @EnableTransactionManagement
-public class SpringConfig {
+public class SpringConfigDb {
 
     @Autowired
     private Environment environment;

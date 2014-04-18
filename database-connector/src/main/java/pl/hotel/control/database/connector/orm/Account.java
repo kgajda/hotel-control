@@ -32,15 +32,15 @@ public class Account implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ACCOUNT_ID")
+    @Column(name = "ACCOUNT_ID", nullable = false, unique = true)
     private int id;
-    @Column(name = "LOGIN", length = 30, nullable = false)
+    @Column(name = "LOGIN", length = 30, nullable = false, unique = true)
     private String login;
     @Column(name = "PASSWORD", length = 30, nullable = false)
     private String password;
     @Column(name = "EMAIL", length = 30, nullable = false)
     private String email;
-    @Column(name = "ACTIVE", length = 1, nullable = false)
+    @Column(name = "ACTIVE", length = 1, nullable = false, unique = true)
     private boolean active;
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private UserInfo userInfo;

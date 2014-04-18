@@ -23,7 +23,7 @@ public class UserInfo implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "USER_INFO_ID")
+    @Column(name = "USER_INFO_ID",unique = true)
     private int id;
     @Column(name = "NAME", length = 20, nullable = false)
     private String name;
@@ -31,19 +31,19 @@ public class UserInfo implements Serializable {
     private String sourName;
     @Column(name = "ADRESS", length = 50, nullable = false)
     private String adress;
-    @Column(name = "ROLE", length = 1, nullable = false)
-    private int role;
+    @Column(name = "ROLE_ACCOUNT", length = 10, nullable = false)
+    private String role_account;
     @Column(name = "PHONE", length = 9, nullable = false)
     private int phone;
 
     public UserInfo() {
     }
 
-    public UserInfo(String name, String sourName, String adress, int role, int phone) {
+    public UserInfo(String name, String sourName, String adress, String role, int phone) {
         this.name = name;
         this.sourName = sourName;
         this.adress = adress;
-        this.role = role;
+        this.role_account = role;
         this.phone = phone;
     }
 
@@ -79,12 +79,12 @@ public class UserInfo implements Serializable {
         this.adress = adress;
     }
 
-    public int getRole() {
-        return role;
+    public String getRole() {
+        return role_account;
     }
 
-    public void setRole(int role) {
-        this.role = role;
+    public void setRole(String role) {
+        this.role_account = role;
     }
 
     public int getPhone() {

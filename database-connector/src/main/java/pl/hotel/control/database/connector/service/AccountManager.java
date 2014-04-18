@@ -7,6 +7,7 @@ package pl.hotel.control.database.connector.service;
  */
 
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.hotel.control.database.connector.doa.AccountDOA;
@@ -21,18 +22,23 @@ public class AccountManager {
 
     @Autowired
     private AccountDOA accountDOA;
+    
+    private final static Logger LOGGER = Logger.getLogger(AccountManager.class);
 
 
     public void save(Account stock) {
         accountDOA.save(stock);
+        LOGGER.info("SAVE ACCOUNT: "+stock.toString());
     }
 
     public void update(Account stock) {
         accountDOA.update(stock);
+        LOGGER.debug(stock);
     }
 
     public void delete(Account stock) {
         accountDOA.delete(stock);
+        LOGGER.debug(stock);
     }
 
     public Account findByName(String name) {
