@@ -3,21 +3,23 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package pl.hotel.control.database.connector.doa;
 
 import pl.hotel.control.database.connector.orm.Account;
+import pl.hotel.control.database.connector.orm.Hotel;
 
 /**
  *
  * @author karol
  */
-public interface AccountDOA {
+public interface HotelDOA {
 
-    void save(Account account);
+    void save(Hotel hotel);
 
-    void update(Account account);
+    void update(Hotel hotel);
 
-    void delete(Account account);
+    void delete(Hotel hotel);
 
     Account findByName(String name);
 

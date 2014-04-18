@@ -1,12 +1,15 @@
+package pl.hotel.control.database.connector.service;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pl.hotel.control.database.connector.doa;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pl.hotel.control.database.connector.doa.AccountDOA;
 import pl.hotel.control.database.connector.orm.Account;
 
 /**
@@ -14,10 +17,10 @@ import pl.hotel.control.database.connector.orm.Account;
  * @author karol
  */
 @Service
-public class AccountBo {
+public class AccountManager {
 
     @Autowired
-    AccountDOA accountDOA;
+    private AccountDOA accountDOA;
 
 
     public void save(Account stock) {

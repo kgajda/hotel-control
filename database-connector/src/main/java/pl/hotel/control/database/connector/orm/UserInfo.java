@@ -22,7 +22,7 @@ import javax.persistence.Table;
 public class UserInfo implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "USER_INFO_ID")
     private int id;
     @Column(name = "NAME", length = 20, nullable = false)
@@ -39,7 +39,7 @@ public class UserInfo implements Serializable {
     public UserInfo() {
     }
 
-    public UserInfo( String name, String sourName, String adress, int role, int phone) {
+    public UserInfo(String name, String sourName, String adress, int role, int phone) {
         this.name = name;
         this.sourName = sourName;
         this.adress = adress;
@@ -94,6 +94,5 @@ public class UserInfo implements Serializable {
     public void setPhone(int phone) {
         this.phone = phone;
     }
-    
-    
+
 }

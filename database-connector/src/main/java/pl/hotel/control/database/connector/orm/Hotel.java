@@ -6,10 +6,18 @@
 package pl.hotel.control.database.connector.orm;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -21,14 +29,22 @@ import javax.persistence.Table;
 public class Hotel implements Serializable {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "HOTEL_ID")
     private int id;
+    
+    @Column(name = "NAME")
+    private String name;
 
     @Column(name = "CITY")
     private String city;
-    
-    
+
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "RESERVATION_ID")
+    private Reservation reservation;
+
+    @OneToMany(mappedBy = "hotel", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<Room> room = new HashSet<>();
 
     public Hotel() {
     }
@@ -51,6 +67,30 @@ public class Hotel implements Serializable {
 
     public void setCity(String city) {
         this.city = city;
+    }
+
+    public Reservation getReservation() {
+        return reservation;
+    }
+
+    public void setReservation(Reservation reservation) {
+        this.reservation = reservation;
+    }
+
+    public Set<Room> getRoom() {
+        return room;
+    }
+
+    public void setRoom(Set<Room> room) {
+        this.room = room;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
 }

@@ -21,27 +21,27 @@ public class AccountDOAImpl extends CustomHibernateDaoSupport implements Account
 
     @Transactional
     @Override
-    public void save(Account stock) {
-        getHibernateTemplate().save(stock);
+    public void save(Account account) {
+        getHibernateTemplate().save(account);
     }
 
     @Transactional
     @Override
-    public void update(Account stock) {
-        getHibernateTemplate().update(stock);
+    public void update(Account account) {
+        getHibernateTemplate().update(account);
     }
 
     @Transactional
     @Override
-    public void delete(Account stock) {
-        getHibernateTemplate().delete(stock);
+    public void delete(Account accoount) {
+        getHibernateTemplate().delete(accoount);
     }
 
     @Transactional
     @Override
-    public Account findByName(String name) {
+    public Account findByName(String login) {
         List list = getHibernateTemplate().find(
-                "from ACCOUNT where name=?", name
+                "from ACCOUNT where login=?", login
         );
         return (Account) list.get(0);
     }

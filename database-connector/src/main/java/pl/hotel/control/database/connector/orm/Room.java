@@ -3,14 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package pl.hotel.control.database.connector.orm;
 
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -20,23 +22,26 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "ROOM")
 public class Room implements Serializable {
-    
+
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ROOM_ID")
     private int id;
-    
+
     @Column(name = "Stars")
     private int stars;
     @Column(name = "BED")
     private int bed;
     @Column(name = "NUMBER")
     private int number;
+    @ManyToOne
+    @JoinColumn(name = "HOTEL_ID")
+    private Hotel hotel;
 
     public Room() {
     }
 
-    public Room( int stars, int bed, int number) {
+    public Room(int stars, int bed, int number) {
         this.stars = stars;
         this.bed = bed;
         this.number = number;
@@ -73,9 +78,13 @@ public class Room implements Serializable {
     public void setNumber(int number) {
         this.number = number;
     }
-    
-    
-    
-    
-    
+
+    public Hotel getHotel() {
+        return hotel;
+    }
+
+    public void setHotel(Hotel hotel) {
+        this.hotel = hotel;
+    }
+
 }

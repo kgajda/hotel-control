@@ -9,11 +9,15 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -23,11 +27,11 @@ import javax.persistence.Temporal;
  * @author karol
  */
 @Entity
-@Table(name = "RESERVATION")
+@Table(name = "RESERVATIONS")
 public class Reservation implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "RESERVATION_ID")
     private int id;
 
@@ -38,8 +42,10 @@ public class Reservation implements Serializable {
     @Column(name = "DATE_TO", nullable = false)
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date date_to;
-
-    @OneToMany
+    @ManyToOne
+    @JoinColumn(name = "ACCOUNT_ID")
+    private Account account;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "reservation", fetch = FetchType.LAZY)
     private Set<Hotel> hotels = new HashSet<>();
 
     public Reservation() {
@@ -80,6 +86,14 @@ public class Reservation implements Serializable {
 
     public void setHotels(Set<Hotel> hotels) {
         this.hotels = hotels;
+    }
+
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
     }
 
 }
