@@ -5,12 +5,15 @@
  */
 package pl.hotel.control.hotel.webpage.controllers.model;
 
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
 /**
  *
  * @author karol
  */
 public class RegisterModel {
-
+    @Size(min = 3,max = 20,message = "Login musi posiadać od 3 do 20 znaków.")
     private String login;
     private String password1;
     private String password2;

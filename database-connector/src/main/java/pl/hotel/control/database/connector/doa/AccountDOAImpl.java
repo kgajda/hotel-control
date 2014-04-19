@@ -22,28 +22,36 @@ public class AccountDOAImpl extends CustomHibernateDaoSupport implements Account
     @Transactional
     @Override
     public void save(Account account) {
-        getHibernateTemplate().save(account);
+        getSessionFactory().getCurrentSession().save(account);
     }
 
     @Transactional
     @Override
     public void update(Account account) {
-        getHibernateTemplate().update(account);
+        getSessionFactory().getCurrentSession().update(account);
     }
 
     @Transactional
     @Override
     public void delete(Account accoount) {
-        getHibernateTemplate().delete(accoount);
+        getSessionFactory().getCurrentSession().delete(accoount);
     }
 
     @Transactional
     @Override
     public Account findByName(String login) {
-        List list = getHibernateTemplate().find(
-                "from ACCOUNT where login=?", login
-        );
+        List list = getSessionFactory().getCurrentSession().createQuery("from account where account.login = ?").setString(0, login).list();
+        System.out.println("**************************");
+        System.out.println(list.size());
+        System.out.println("**************************");
         return (Account) list.get(0);
+    }
+
+    @Transactional
+    @Override
+    public List<Account> getAllAccount() {
+        List<Account> list = getSessionFactory().getCurrentSession().createCriteria(Account.class).list();
+        return list;
     }
 
 }

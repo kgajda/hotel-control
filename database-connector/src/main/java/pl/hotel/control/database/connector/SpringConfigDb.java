@@ -6,6 +6,9 @@
 package pl.hotel.control.database.connector;
 
 import java.util.Properties;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import org.apache.commons.dbcp.BasicDataSource;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +29,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  * @author karol
  */
 @Configuration
-@ComponentScan(basePackages = {"pl.hotel.database.connector","pl.hotel.control.database.connector.doa","pl.hotel.control.database.connector.service"})
+@ComponentScan(basePackages = {"pl.hotel.database.connector", "pl.hotel.control.database.connector.doa", "pl.hotel.control.database.connector.service"})
 @PropertySource(value = {"classpath:/jdbc.properties", "classpath:/Hibernate.properties"})
 @EnableTransactionManagement
 public class SpringConfigDb {
@@ -64,9 +67,10 @@ public class SpringConfigDb {
     public PersistenceExceptionTranslationPostProcessor exceptionTranslation() {
         return new PersistenceExceptionTranslationPostProcessor();
     }
-     @Bean 
-    public HibernateExceptionTranslator hibernateExceptionTranslator(){ 
-      return new HibernateExceptionTranslator(); 
+
+    @Bean
+    public HibernateExceptionTranslator hibernateExceptionTranslator() {
+        return new HibernateExceptionTranslator();
     }
 
     Properties getHibernateProperties() {
@@ -78,4 +82,5 @@ public class SpringConfigDb {
         hibernateProperties.setProperty("hibernate.connection.useUnicode", environment.getProperty("hibernate.connection.useUnicode"));
         return hibernateProperties;
     }
+
 }

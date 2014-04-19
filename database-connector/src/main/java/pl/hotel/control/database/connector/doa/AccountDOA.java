@@ -5,6 +5,7 @@
  */
 package pl.hotel.control.database.connector.doa;
 
+import java.util.List;
 import pl.hotel.control.database.connector.orm.Account;
 
 /**
@@ -20,5 +21,7 @@ public interface AccountDOA {
     void delete(Account account);
 
     Account findByName(String name);
+
+    List<Account> getAllAccount();
 
 }

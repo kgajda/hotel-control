@@ -7,9 +7,6 @@ package pl.hotel.control.database.connector.doa;
 
 import javax.annotation.Resource;
 import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean;
 import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
 
 /**
@@ -20,7 +17,6 @@ public abstract class CustomHibernateDaoSupport extends HibernateDaoSupport {
 
     @Resource
     public void hibernateDaoSupport(SessionFactory sessionFactory) {
-//        this.sessionFactory = sessionFactory;
         setSessionFactory(sessionFactory);
     }
 

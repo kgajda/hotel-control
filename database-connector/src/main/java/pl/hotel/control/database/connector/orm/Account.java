@@ -40,9 +40,9 @@ public class Account implements Serializable {
     private String password;
     @Column(name = "EMAIL", length = 30, nullable = false)
     private String email;
-    @Column(name = "ACTIVE", length = 1, nullable = false, unique = true)
+    @Column(name = "ACTIVE", length = 1, nullable = false)
     private boolean active;
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private UserInfo userInfo;
     @OneToMany(mappedBy = "account", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Reservation> stockDailyRecords = new HashSet<>(0);
