@@ -40,11 +40,13 @@ public class AccountDOAImpl extends CustomHibernateDaoSupport implements Account
     @Transactional
     @Override
     public Account findByName(String login) {
-        List list = getSessionFactory().getCurrentSession().createQuery("from account where account.login = ?").setString(0, login).list();
-        System.out.println("**************************");
-        System.out.println(list.size());
-        System.out.println("**************************");
-        return (Account) list.get(0);
+        System.out.println(login);
+        List list = getSessionFactory().getCurrentSession().createQuery("from Account where login = ?").setString(0, login).list();
+        if (list.size() == 1) {
+            return (Account) list.get(0);
+        } else {
+            return null;
+        }
     }
 
     @Transactional

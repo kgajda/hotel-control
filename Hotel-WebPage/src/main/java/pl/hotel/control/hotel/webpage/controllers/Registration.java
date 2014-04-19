@@ -10,7 +10,11 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.AbstractBindingResult;
+import org.springframework.validation.AbstractErrors;
+import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import pl.hotel.control.database.connector.orm.Account;
@@ -35,6 +39,9 @@ public class Registration {
     }
     @RequestMapping(method = RequestMethod.POST)
     public String registion(@Valid RegisterModel register,BindingResult bindingResult,Model model){
+        if(accountManager.isExist(register.getLogin())){
+            bindingResult.rejectValue("login", "login", "Logij jest już zajęty");
+        }
         if(bindingResult.hasErrors()){
             return "registion";
         }

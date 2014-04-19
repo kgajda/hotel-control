@@ -44,7 +44,15 @@ public class AccountManager {
     }
 
     public List<Account> getAllAccount() {
-       return accountDOA.getAllAccount();
+        return accountDOA.getAllAccount();
+    }
+
+    public boolean isExist(String login) {
+        if (findByName(login) != null) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
 }

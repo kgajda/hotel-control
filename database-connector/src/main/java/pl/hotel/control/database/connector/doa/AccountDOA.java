@@ -20,6 +20,12 @@ public interface AccountDOA {
 
     void delete(Account account);
 
+    /**
+     * Wyszukuje konto na podstawie loginu.
+     *
+     * @param name login
+     * @return Account or Null
+     */
     Account findByName(String name);
 
     List<Account> getAllAccount();

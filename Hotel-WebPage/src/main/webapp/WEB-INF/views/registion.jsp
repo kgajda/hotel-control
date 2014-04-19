@@ -11,7 +11,7 @@
                 </tr>
                 <tr>
                     <td class="error">
-                        <spring:errors cssClass="error" path="login"/>
+                        <spring:errors cssClass="error" path="login" />
                     </td>
                 </tr>
                 <tr>
