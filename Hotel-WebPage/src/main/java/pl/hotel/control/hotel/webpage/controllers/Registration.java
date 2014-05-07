@@ -8,19 +8,20 @@ package pl.hotel.control.hotel.webpage.controllers;
 
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.AbstractBindingResult;
 import org.springframework.validation.AbstractErrors;
-import org.springframework.validation.BindException;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import pl.hotel.control.database.connector.orm.Account;
 import pl.hotel.control.database.connector.orm.UserInfo;
 import pl.hotel.control.database.connector.service.AccountManager;
-import pl.hotel.control.hotel.webpage.controllers.model.RegisterModel;
+import pl.hotel.control.transport.RegisterModel;
+
 
 /**
  *
@@ -32,22 +33,22 @@ public class Registration {
     @Autowired
     private AccountManager accountManager;
     
-    @RequestMapping(method = RequestMethod.GET)
-    public String showRegistion(Model model){
-        model.addAttribute(new RegisterModel());
-        return "registion";
-    }
     @RequestMapping(method = RequestMethod.POST)
-    public String registion(@Valid RegisterModel register,BindingResult bindingResult,Model model){
-        if(accountManager.isExist(register.getLogin())){
-            bindingResult.rejectValue("login", "login", "Logij jest już zajęty");
-        }
-        if(bindingResult.hasErrors()){
-            return "registion";
-        }
-        Account account = new Account(register.getLogin(), register.getPassword1(), register.getMail(), false);
-        account.setUserInfo(new UserInfo(register.getName(), register.getSourname(), register.getAddres(), "user", register.getPhone()));
-        accountManager.save(account);
-        return "status";
+    @ResponseBody
+    public ResponseEntity<String> registion(RegisterModel register){
+        Account acc = new Account();
+        acc.setActive(false);
+        acc.setEmail(register.getEmail());
+        acc.setLogin(register.getLogin());
+        acc.setPassword(register.getPassword());
+        UserInfo userinfo = new UserInfo();
+        userinfo.setAdress(register.getAdress());
+        userinfo.setName(register.getName());
+        userinfo.setPhone(register.getPhone());
+        userinfo.setSourName(register.getSourName());
+        userinfo.setRole("user");
+        acc.setUserInfo(userinfo);
+        accountManager.save(acc);
+        return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }
 }

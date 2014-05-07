@@ -7,19 +7,18 @@
 package pl.hotel.control.hotel.webpage.controllers;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
  *
  * @author karol
  */
 @Controller
-public class Home {
+@RequestMapping("/user")
+public class User {
     
-    @RequestMapping(value = {"/","/home"})
-    public String showHome(Model model){
-        return "home";
-    }
+    
     
 }

@@ -8,6 +8,7 @@ package pl.hotel.control.database.connector.orm;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -25,7 +26,7 @@ public class Room implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ROOM_ID")
+    @Column(name = "ROOM_ID",unique = true, nullable = false)
     private int id;
 
     @Column(name = "Stars")
@@ -34,8 +35,8 @@ public class Room implements Serializable {
     private int bed;
     @Column(name = "NUMBER")
     private int number;
-    @ManyToOne
-    @JoinColumn(name = "HOTEL_ID")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "HOTEL_ID",nullable = false)
     private Hotel hotel;
 
     public Room() {

@@ -6,11 +6,7 @@
 package pl.hotel.control.database.connector;
 
 import java.util.Properties;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import org.apache.commons.dbcp.BasicDataSource;
-import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;

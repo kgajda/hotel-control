@@ -30,9 +30,9 @@ public class Hotel implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "HOTEL_ID")
-    private int id;
-    
+    @Column(name = "HOTEL_ID",unique = true, nullable = false)
+    private Integer id;
+
     @Column(name = "NAME")
     private String name;
 
@@ -42,9 +42,8 @@ public class Hotel implements Serializable {
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "RESERVATION_ID")
     private Reservation reservation;
-
-    @OneToMany(mappedBy = "hotel", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<Room> room = new HashSet<>();
+    @OneToMany(mappedBy = "hotel", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Set<Room> room;
 
     public Hotel() {
     }
@@ -53,11 +52,11 @@ public class Hotel implements Serializable {
         this.city = city;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -91,6 +90,15 @@ public class Hotel implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("ID: " + id);
+        builder.append("Name: " + name);
+        builder.append("City: " + city);
+        return builder.toString();
     }
 
 }

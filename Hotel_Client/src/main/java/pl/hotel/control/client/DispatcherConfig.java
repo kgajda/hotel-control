@@ -3,16 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pl.hotel.control.hotel.webpage;
+package pl.hotel.control.client;
 
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
-import pl.hotel.control.database.connector.SpringConfigDb;
 
 /**
  *
@@ -20,14 +20,25 @@ import pl.hotel.control.database.connector.SpringConfigDb;
  */
 @Configuration
 @EnableWebMvc
-@ComponentScan("pl.hotel.control.hotel.webpage")
-@Import(SpringConfigDb.class)
+@ComponentScan("pl.hotel.control.client")
 public class DispatcherConfig extends WebMvcConfigurerAdapter{
-
     @Bean
     public ObjectMapper mapper(){
         return new ObjectMapper();
     }
+    @Bean
+    public MappingJackson2HttpMessageConverter converterJson(){
+        MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
+        return converter;
+    }
+
+    @Bean
+    public RestTemplate restTemplate(){
+        RestTemplate restTemplate = new RestTemplate();
+        restTemplate.getMessageConverters().add(converterJson());
+        return restTemplate;
+    }
+    
 
 //    @Override
 //    public void addResourceHandlers(ResourceHandlerRegistry registry) {

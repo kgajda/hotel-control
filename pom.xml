@@ -17,7 +17,9 @@
     <packaging>pom</packaging>
     <modules>
         <module>database-connector</module>
-    <module>Hotel-WebPage</module>
+        <module>Hotel-WebPage</module>
+        <module>Transport</module>
+    <module>Hotel_Client</module>
   </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -30,6 +32,12 @@
             <artifactId>log4j</artifactId>
             <version>1.2.17</version>
         </dependency>
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20140107</version>
+        </dependency>
+            
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
