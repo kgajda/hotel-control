@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pl.hotel.control.database.connector.orm;
+package pl.hotel.control.orm;
 
 import java.io.Serializable;
 import java.util.HashSet;
@@ -30,9 +30,9 @@ public class Hotel implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "HOTEL_ID",unique = true, nullable = false)
-    private Integer id;
-
+    @Column(name = "HOTEL_ID", nullable = false, unique = true)
+    private int id;
+    
     @Column(name = "NAME")
     private String name;
 
@@ -42,8 +42,9 @@ public class Hotel implements Serializable {
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "RESERVATION_ID")
     private Reservation reservation;
+
     @OneToMany(mappedBy = "hotel", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private Set<Room> room;
+    private Set<Room> room = new HashSet<>();
 
     public Hotel() {
     }
@@ -52,11 +53,11 @@ public class Hotel implements Serializable {
         this.city = city;
     }
 
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -95,10 +96,12 @@ public class Hotel implements Serializable {
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
-        builder.append("ID: " + id);
-        builder.append("Name: " + name);
-        builder.append("City: " + city);
+        builder.append("ID: "+id);
+        builder.append("Name: "+name);
+        builder.append("City: "+city);
         return builder.toString();
-    }
+}
+    
+    
 
 }

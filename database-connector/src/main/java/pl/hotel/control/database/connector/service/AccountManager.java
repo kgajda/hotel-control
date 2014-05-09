@@ -10,7 +10,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.hotel.control.database.connector.doa.AccountDOA;
-import pl.hotel.control.database.connector.orm.Account;
+import pl.hotel.control.orm.Account;
 
 /**
  *

@@ -62,5 +62,11 @@
             <artifactId>spring-orm</artifactId>
             <version>4.0.2.RELEASE</version>
         </dependency>
+        <dependency>
+            <groupId>pl.hotel.control</groupId>
+            <artifactId>ORM</artifactId>
+            <version>1.0</version>
+            <type>jar</type>
+        </dependency>
     </dependencies>
 </project>

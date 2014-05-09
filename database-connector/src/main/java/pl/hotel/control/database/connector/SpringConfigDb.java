@@ -48,7 +48,7 @@ public class SpringConfigDb {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
         sessionFactory.setDataSource(basicDataSource());
         sessionFactory.setHibernateProperties(getHibernateProperties());
-        sessionFactory.setPackagesToScan(new String[]{"pl.hotel.control.database.connector.orm"});
+        sessionFactory.setPackagesToScan(new String[]{"pl.hotel.control.orm"});
         return sessionFactory;
     }
 

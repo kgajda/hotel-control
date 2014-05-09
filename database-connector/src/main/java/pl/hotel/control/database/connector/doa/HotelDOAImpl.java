@@ -8,8 +8,9 @@ package pl.hotel.control.database.connector.doa;
 import java.util.List;
 import javax.transaction.Transactional;
 import org.springframework.stereotype.Repository;
-import pl.hotel.control.database.connector.orm.Account;
-import pl.hotel.control.database.connector.orm.Hotel;
+import pl.hotel.control.orm.Account;
+import pl.hotel.control.orm.Hotel;
+import pl.hotel.control.orm.Room;
 
 /**
  *
@@ -21,6 +22,9 @@ public class HotelDOAImpl extends CustomHibernateDaoSupport implements HotelDOA 
     @Transactional
     @Override
     public void save(Hotel hotel) {
+        for (Room room : hotel.getRoom()) {
+            getSessionFactory().getCurrentSession().save(room);
+        }
         getSessionFactory().getCurrentSession().save(hotel);
     }
 
@@ -44,9 +48,10 @@ public class HotelDOAImpl extends CustomHibernateDaoSupport implements HotelDOA 
         );
         return (Account) list.get(0);
     }
+
     @Transactional
     @Override
-    public List<Hotel> getAllHotels(){
+    public List<Hotel> getAllHotels() {
         List<Hotel> hotels = getSessionFactory().getCurrentSession().createCriteria(Hotel.class).list();
         return hotels;
     }

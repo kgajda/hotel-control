@@ -10,7 +10,8 @@ import javax.annotation.Resource;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-import pl.hotel.control.database.connector.orm.Account;
+import pl.hotel.control.orm.Account;
+import pl.hotel.control.orm.Reservation;
 
 /**
  *
@@ -22,6 +23,9 @@ public class AccountDOAImpl extends CustomHibernateDaoSupport implements Account
     @Transactional
     @Override
     public void save(Account account) {
+        for (Reservation reservation : account.getStockDailyRecords()) {
+            getSessionFactory().getCurrentSession().save(reservation);
+        }
         getSessionFactory().getCurrentSession().save(account);
     }
 

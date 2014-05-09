@@ -11,7 +11,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.hotel.control.database.connector.doa.HotelDOA;
-import pl.hotel.control.database.connector.orm.Hotel;
+import pl.hotel.control.orm.Hotel;
 
 /**
  *
@@ -27,7 +27,7 @@ public class HotelManager {
     
     public void save(Hotel hotel){
         hotelDOA.save(hotel);
-        LOGGER.debug("Save hotel: "+hotel);
+        
     }
     
     public List<Hotel> getAllHotels(){

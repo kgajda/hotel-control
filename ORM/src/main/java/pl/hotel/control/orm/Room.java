@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pl.hotel.control.database.connector.orm;
+package pl.hotel.control.orm;
 
 import java.io.Serializable;
 import javax.persistence.Column;
@@ -26,7 +26,7 @@ public class Room implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ROOM_ID",unique = true, nullable = false)
+    @Column(name = "ROOM_ID", nullable = false, unique = true)
     private int id;
 
     @Column(name = "Stars")
@@ -35,8 +35,8 @@ public class Room implements Serializable {
     private int bed;
     @Column(name = "NUMBER")
     private int number;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "HOTEL_ID",nullable = false)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "HOTEL")
     private Hotel hotel;
 
     public Room() {

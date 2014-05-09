@@ -18,9 +18,9 @@
     <modules>
         <module>database-connector</module>
         <module>Hotel-WebPage</module>
-        <module>Transport</module>
     <module>Hotel_Client</module>
-  </modules>
+        <module>ORM</module>
+    </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>

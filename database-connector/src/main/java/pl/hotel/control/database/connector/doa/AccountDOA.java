@@ -6,7 +6,7 @@
 package pl.hotel.control.database.connector.doa;
 
 import java.util.List;
-import pl.hotel.control.database.connector.orm.Account;
+import pl.hotel.control.orm.Account;
 
 /**
  *
