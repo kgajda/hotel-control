@@ -23,23 +23,6 @@ public class App {
     
     public static void main(String[] args) {
         ApplicationContext ac = new AnnotationConfigApplicationContext(SpringConfigDb.class);
-        HotelManager hotelManager = ac.getBean(HotelManager.class);
-        RoomManager roomManager = ac.getBean(RoomManager.class);
-        Hotel h = new Hotel("krakówa");
-        Room r = new Room(5, 7, 1);
-        h.getRoom().add(r);
-        r.setHotel(h);
-        
-        
-//        roomManager.save(r);
-        hotelManager.save(h);
-        List<Hotel> roms = hotelManager.getAllHotels();
-        for (Hotel hotel : roms) {
-            System.out.println(hotel.getCity());
-            for (Room room : hotel.getRoom()) {
-                System.out.println(room.getBed());
-            }
-        }
         
     }
     

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pl.hotel.control.orm;
+package pl.hotel.control.Transport;
 
 import java.io.Serializable;
 import java.util.HashSet;
@@ -21,26 +21,18 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
- * 1:n NumberROOM
+ *
  * @author karol
  */
-@Entity
-@Table(name = "HOTEL")
 public class Hotel implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "HOTEL_ID", nullable = false, unique = true)
     private Integer id;
 
-    @Column(name = "NAME")
     private String name;
 
-    @Column(name = "CITY")
     private String city;
 
-    @OneToMany(mappedBy = "hotel", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private Set<HottelRoom> room = new HashSet<>();
+    private Set<Integer> room = new HashSet<>();
 
     public Hotel() {
     }
@@ -65,14 +57,6 @@ public class Hotel implements Serializable {
         this.city = city;
     }
 
-    public Set<HottelRoom> getRoom() {
-        return room;
-    }
-
-    public void setRoom(Set<HottelRoom> room) {
-        this.room = room;
-    }
-
     public String getName() {
         return name;
     }
@@ -81,14 +65,12 @@ public class Hotel implements Serializable {
         this.name = name;
     }
 
-    @Override
-    public String toString() {
-        StringBuilder builder = new StringBuilder();
-        builder.append("ID: " + id);
-        builder.append("Name: " + name);
-        builder.append("City: " + city);
-        builder.append("Ilość pokoi" + Integer.toString(room.size()));
-        return builder.toString();
+    public Set<Integer> getRoom() {
+        return room;
+    }
+
+    public void setRoom(Set<Integer> room) {
+        this.room = room;
     }
 
 }

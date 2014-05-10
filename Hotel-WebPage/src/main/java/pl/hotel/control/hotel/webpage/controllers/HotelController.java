@@ -5,18 +5,15 @@
  */
 package pl.hotel.control.hotel.webpage.controllers;
 
-import java.util.LinkedList;
 import java.util.List;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import pl.hotel.control.database.connector.service.HotelManager;
-import pl.hotel.control.transport.HotelTransport;
-import pl.hotel.control.transport.HotelsTransport;
-import pl.hotel.control.transport.RoomsTransport;
 
 /**
  *
@@ -24,7 +21,7 @@ import pl.hotel.control.transport.RoomsTransport;
  */
 @Controller
 @RequestMapping(value = {"/hotel"})
-public class Hotel {
+public class HotelController {
 
     @Autowired
     private HotelManager hotelManager;
@@ -35,7 +32,12 @@ public class Hotel {
     public @ResponseBody
     List<pl.hotel.control.orm.Hotel> getAllHotel() {
         List<pl.hotel.control.orm.Hotel> hotels = hotelManager.getAllHotels();
-        
         return hotels;
+    }
+    @RequestMapping(value = {"/{name}"}, method = RequestMethod.GET)
+    public @ResponseBody
+    pl.hotel.control.orm.Hotel getHotel(@PathVariable String name) {
+       return hotelManager.getHotel(name);
+        
     }
 }

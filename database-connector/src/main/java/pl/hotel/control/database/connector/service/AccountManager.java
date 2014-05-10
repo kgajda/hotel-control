@@ -31,12 +31,16 @@ public class AccountManager {
 
     public void update(Account stock) {
         accountDOA.update(stock);
-        LOGGER.debug(stock);
+        LOGGER.info("UPDATE ACOUNT");
     }
 
     public void delete(Account stock) {
         accountDOA.delete(stock);
-        LOGGER.debug(stock);
+        LOGGER.debug("DELETE ACCOUNT: "+stock.toString());
+    }
+    public void delete(String stock) {
+       Account c =  findByName(stock);
+        accountDOA.delete(c);
     }
 
     public Account findByName(String name) {

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pl.hotel.control.orm;
+package pl.hotel.control.Transport;
 
 import java.io.Serializable;
 import javax.persistence.CascadeType;
@@ -21,21 +21,17 @@ import javax.persistence.Table;
  *
  * @author karol
  */
-@Entity
-@Table(name = "ROOM")
+
 public class Room implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ROOM_ID", nullable = false, unique = true)
+    
     private int id;
 
-    @Column(name = "Stars")
     private int stars;
-    @Column(name = "BED")
     private int bed;
-    @Column(name = "NUMBER")
     private int number;
+    private Integer hotel;
+    private Integer reservation;
 
     public Room() {
     }
@@ -76,6 +72,22 @@ public class Room implements Serializable {
 
     public void setNumber(int number) {
         this.number = number;
+    }
+
+    public Integer getHotel() {
+        return hotel;
+    }
+
+    public void setHotel(Integer hotel) {
+        this.hotel = hotel;
+    }
+
+    public Integer getReservation() {
+        return reservation;
+    }
+
+    public void setReservation(Integer reservation) {
+        this.reservation = reservation;
     }
 
 }

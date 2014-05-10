@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pl.hotel.control.orm;
+package pl.hotel.control.Transport;
 
+import pl.hotel.control.orm.*;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;

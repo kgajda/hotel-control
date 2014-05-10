@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pl.hotel.control.orm;
+package pl.hotel.control.Transport;
 
 import java.io.Serializable;
 import java.util.HashSet;
@@ -23,30 +23,20 @@ import javax.persistence.Table;
 
 /**
  * ORM - Obsłyga tabeli ACCOUNT
- * 1:1 UserInfo
- * 1:N Reservation
+ *
  * @author karol
  */
-@Entity
-@Table(name = "ACCOUNT")
+
 public class Account implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ACCOUNT_ID", nullable = false, unique = true)
+   
     private Integer id;
-    @Column(name = "LOGIN", length = 30, nullable = false, unique = true)
     private String login;
-    @Column(name = "PASSWORD", length = 30, nullable = false)
     private String password;
-    @Column(name = "EMAIL", length = 30, nullable = false)
     private String email;
-    @Column(name = "ACTIVE", length = 1, nullable = false)
     private boolean active;
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private UserInfo userInfo;
-    @OneToMany(mappedBy = "account", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private Set<Reservation> stockDailyRecords = new HashSet<>(0);
+    private Integer userInfo;
+    private Set<Integer> stockDailyRecords = new HashSet<>(0);
 
     public Account() {
     }
@@ -98,34 +88,20 @@ public class Account implements Serializable {
         this.active = active;
     }
 
-    public UserInfo getUserInfo() {
+    public Integer getUserInfo() {
         return userInfo;
     }
 
-    public void setUserInfo(UserInfo userInfo) {
+    public void setUserInfo(Integer userInfo) {
         this.userInfo = userInfo;
     }
 
-    public Set<Reservation> getStockDailyRecords() {
+    public Set<Integer> getStockDailyRecords() {
         return stockDailyRecords;
     }
 
-    public void setStockDailyRecords(Set<Reservation> stockDailyRecords) {
+    public void setStockDailyRecords(Set<Integer> stockDailyRecords) {
         this.stockDailyRecords = stockDailyRecords;
     }
-
-    @Override
-    public String toString() {
-        StringBuilder builder = new StringBuilder();
-        builder.append("ID: "+id);
-        builder.append("Login: "+ login);
-        if(userInfo !=null){
-            builder.append("UserInfo: ");
-            builder.append(userInfo.toString());
-        }
-        return builder.toString();
-    }
-    
-    
 
 }

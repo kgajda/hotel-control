@@ -22,7 +22,7 @@ public interface HotelDOA {
 
     void delete(Hotel hotel);
 
-    Account findByName(String name);
+    Hotel findByName(String name);
     List<Hotel> getAllHotels();
 
 }

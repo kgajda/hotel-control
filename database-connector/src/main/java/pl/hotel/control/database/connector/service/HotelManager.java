@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.hotel.control.database.connector.doa.HotelDOA;
 import pl.hotel.control.orm.Hotel;
+import pl.hotel.control.orm.Room;
 
 /**
  *
@@ -26,8 +27,12 @@ public class HotelManager {
     private final static Logger LOGGER = Logger.getLogger(HotelManager.class);
     
     public void save(Hotel hotel){
-        hotelDOA.save(hotel);
         
+        hotelDOA.save(hotel);  
+        LOGGER.info("INSERT HOTEL: "+ hotel.toString());
+    }
+    public Hotel getHotel(String name){
+       return  hotelDOA.findByName(name);
     }
     
     public List<Hotel> getAllHotels(){

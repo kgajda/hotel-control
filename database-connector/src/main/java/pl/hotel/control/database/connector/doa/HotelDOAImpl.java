@@ -22,9 +22,7 @@ public class HotelDOAImpl extends CustomHibernateDaoSupport implements HotelDOA 
     @Transactional
     @Override
     public void save(Hotel hotel) {
-        for (Room room : hotel.getRoom()) {
-            getSessionFactory().getCurrentSession().save(room);
-        }
+       
         getSessionFactory().getCurrentSession().save(hotel);
     }
 
@@ -42,11 +40,11 @@ public class HotelDOAImpl extends CustomHibernateDaoSupport implements HotelDOA 
 
     @Transactional
     @Override
-    public Account findByName(String name) {
+    public Hotel findByName(String name) {
         List list = getHibernateTemplate().find(
-                "from ACCOUNT where name=?", name
+                "from Hotel where name=?", name
         );
-        return (Account) list.get(0);
+        return (Hotel) list.get(0);
     }
 
     @Transactional

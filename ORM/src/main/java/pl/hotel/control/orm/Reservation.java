@@ -42,11 +42,12 @@ public class Reservation implements Serializable {
     @Column(name = "DATE_TO", nullable = false)
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date date_to;
+
     @ManyToOne
     @JoinColumn(name = "ACCOUNT_ID")
     private Account account;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "reservation", fetch = FetchType.LAZY)
-    private Set<Hotel> hotels = new HashSet<>();
+    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    private HottelRoom hottelroom;
 
     public Reservation() {
     }
@@ -80,13 +81,14 @@ public class Reservation implements Serializable {
         this.date_to = date_to;
     }
 
-    public Set<Hotel> getHotels() {
-        return hotels;
+    public HottelRoom getHottelroom() {
+        return hottelroom;
     }
 
-    public void setHotels(Set<Hotel> hotels) {
-        this.hotels = hotels;
+    public void setHottelroom(HottelRoom hottelroom) {
+        this.hottelroom = hottelroom;
     }
+
 
     public Account getAccount() {
         return account;
