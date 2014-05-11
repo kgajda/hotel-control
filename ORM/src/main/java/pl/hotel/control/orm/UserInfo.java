@@ -31,19 +31,16 @@ public class UserInfo implements Serializable {
     private String sourName;
     @Column(name = "ADRESS", length = 50, nullable = false)
     private String adress;
-    @Column(name = "ROLE_ACCOUNT", length = 10, nullable = false)
-    private String role_account;
     @Column(name = "PHONE", length = 9, nullable = false)
     private int phone;
 
     public UserInfo() {
     }
 
-    public UserInfo(String name, String sourName, String adress, String role, int phone) {
+    public UserInfo(String name, String sourName, String adress, int phone) {
         this.name = name;
         this.sourName = sourName;
         this.adress = adress;
-        this.role_account = role;
         this.phone = phone;
     }
 
@@ -79,14 +76,6 @@ public class UserInfo implements Serializable {
         this.adress = adress;
     }
 
-    public String getRole() {
-        return role_account;
-    }
-
-    public void setRole(String role) {
-        this.role_account = role;
-    }
-
     public int getPhone() {
         return phone;
     }
@@ -102,7 +91,6 @@ public class UserInfo implements Serializable {
         builder.append("Name: " + name);
         builder.append("Sourname: " + sourName);
         builder.append("Address: " + adress);
-        builder.append("Type: " + role_account);
         return builder.toString();
     }
 

@@ -3,23 +3,23 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package pl.hotel.control.database.connector.doa;
 
-import javax.transaction.Transactional;
 import org.springframework.stereotype.Repository;
-import pl.hotel.control.orm.Room;
+import org.springframework.transaction.annotation.Transactional;
+import pl.hotel.control.orm.HotelRoom;
 
 /**
  *
  * @author karol
  */
 @Repository
-public class RoomDOAImpl extends CustomHibernateDaoSupport implements RoomDOA {
-
+public class HotelRoomDOAImpl extends CustomHibernateDaoSupport implements HotelRoomDOA{
     @Transactional
     @Override
-    public void save(Room room) {
-        getSessionFactory().getCurrentSession().saveOrUpdate(room);
+    public void save(HotelRoom hotelRoom) {
+        getSessionFactory().getCurrentSession().save(hotelRoom);
     }
-
+    
 }

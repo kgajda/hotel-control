@@ -60,16 +60,20 @@ public class JsonTest {
         System.out.println("###########HOTEL#############");
         String result = mapper.writeValueAsString(hotel);
         System.out.println(result);
+        Hotel h = mapper.readValue(result, Hotel.class);
+
     }
 
     @Test
     public void testAccount() throws IOException {
-        Account account = new Account("karol", "test", "karol@agh", true);
-        UserInfo info = new UserInfo("karol", "gajda", "Karoków, al Mod", "user", 123456789);
+        Account account = new Account("karol", "test", "karol@agh", Status.ACTIVE, Role.ADMIN);
+        UserInfo info = new UserInfo("karol", "gajda", "Karoków, al Mod", 123456789);
         account.setUserInfo(info);
         System.out.println("###########Account#############");
         String result = mapper.writeValueAsString(account);
         System.out.println(result);
+        Account a = mapper.readValue(result, Account.class);
+        System.out.println(a.getStatus());
     }
 
 }

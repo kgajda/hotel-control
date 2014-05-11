@@ -5,21 +5,21 @@
  */
 package pl.hotel.control.database.connector.doa;
 
-import javax.transaction.Transactional;
 import org.springframework.stereotype.Repository;
-import pl.hotel.control.orm.Room;
+import org.springframework.transaction.annotation.Transactional;
+import pl.hotel.control.orm.NumberRoom;
 
 /**
  *
  * @author karol
  */
 @Repository
-public class RoomDOAImpl extends CustomHibernateDaoSupport implements RoomDOA {
+public class NumberRoomDOAImpl extends CustomHibernateDaoSupport implements NumberRoomDOA {
 
     @Transactional
     @Override
-    public void save(Room room) {
-        getSessionFactory().getCurrentSession().saveOrUpdate(room);
+    public void save(NumberRoom numberRoom) {
+        getSessionFactory().getCurrentSession().save(numberRoom);
     }
 
 }

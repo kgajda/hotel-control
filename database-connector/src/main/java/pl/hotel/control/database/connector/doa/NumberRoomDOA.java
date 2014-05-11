@@ -6,22 +6,13 @@
 
 package pl.hotel.control.database.connector.doa;
 
-import pl.hotel.control.orm.Reservation;
+import org.springframework.stereotype.Repository;
+import pl.hotel.control.orm.NumberRoom;
 
 /**
  *
  * @author karol
  */
-public interface ReservationDOA {
-    /**
-     * Zapis nowej rezerwacji
-     * @param r 
-     */
-    void save(Reservation r);
-    /**
-     * Update rezerwacji
-     * @param r 
-     */
-    void update(Reservation r);
-    
+public interface NumberRoomDOA {
+    void save(NumberRoom numberRoom);
 }

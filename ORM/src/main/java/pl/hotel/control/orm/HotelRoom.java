@@ -38,7 +38,8 @@ public class HotelRoom implements Serializable {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "HOTEL_ID")
     private Hotel hotel;
-
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Room room;
     @OneToMany(mappedBy = "hotelroom", fetch = FetchType.EAGER)
     private Set<Reservation> reservations = new HashSet<>();
 
@@ -82,6 +83,12 @@ public class HotelRoom implements Serializable {
         this.reservations = reservations;
     }
 
-   
+    public Room getRoom() {
+        return room;
+    }
+
+    public void setRoom(Room room) {
+        this.room = room;
+    }
 
 }

@@ -22,4 +22,10 @@ public class ReservationDOAImpl extends CustomHibernateDaoSupport implements Res
         getSessionFactory().getCurrentSession().save(r);
     }
 
+    @Transactional
+    @Override
+    public void update(Reservation r) {
+        getSessionFactory().getCurrentSession().update(r);
+    }
+
 }

@@ -23,10 +23,7 @@ public class AccountDOAImpl extends CustomHibernateDaoSupport implements Account
     @Transactional
     @Override
     public void save(Account account) {
-        for (Reservation reservation : account.getStockDailyRecords()) {
-            getSessionFactory().getCurrentSession().save(reservation);
-        }
-        getSessionFactory().getCurrentSession().save(account);
+        getSessionFactory().getCurrentSession().saveOrUpdate(account);
     }
 
     @Transactional
@@ -44,8 +41,17 @@ public class AccountDOAImpl extends CustomHibernateDaoSupport implements Account
     @Transactional
     @Override
     public Account findByName(String login) {
-        System.out.println(login);
         List list = getSessionFactory().getCurrentSession().createQuery("from Account where login = ?").setString(0, login).list();
+        if (list.size() == 1) {
+            return (Account) list.get(0);
+        } else {
+            return null;
+        }
+    }
+    @Transactional
+    @Override
+    public Account findById(String id) {
+        List list = getSessionFactory().getCurrentSession().createQuery("from Account where login = ?").setString(0, id).list();
         if (list.size() == 1) {
             return (Account) list.get(0);
         } else {

@@ -3,19 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
-package pl.hotel.control.database.connector.doa;
-
-import pl.hotel.control.orm.Room;
+package pl.hotel.control.orm;
 
 /**
  *
  * @author karol
  */
-public interface RoomDOA {
-    /**
-     * Zapis nowego Pokoju
-     * @param room 
-     */
-    void save(Room room);
+public enum Status {
+
+    BLOCK, ACTIVE, TOCHECK;
+
 }

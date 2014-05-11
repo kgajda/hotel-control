@@ -3,32 +3,33 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package pl.hotel.control.database.connector.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pl.hotel.control.database.connector.doa.RoomDOA;
-import pl.hotel.control.database.connector.doa.RoomDOAImpl;
+import org.springframework.transaction.annotation.Transactional;
+import pl.hotel.control.database.connector.doa.NumberRoomDOA;
 import pl.hotel.control.orm.HotelRoom;
-import pl.hotel.control.orm.Room;
+import pl.hotel.control.orm.NumberRoom;
 
 /**
  *
  * @author karol
  */
 @Service
-public class RoomManager {
-
+public class NumberRoomManager {
     @Autowired
-    private RoomDOA roomDOA;
+    private NumberRoomDOA numberRoomDOA;
     @Autowired
     private HotelRoomManager hotelRoomManager;
-
-    public void save(Room r) {
-        for (HotelRoom object : r.getHotelRooms()) {
-            object.setRoom(r);
-            hotelRoomManager.save(object);
+    @Transactional
+    public void save(NumberRoom numberRoom){
+        for (HotelRoom hotelRoom : numberRoom.getHottelRooms()) {
+            hotelRoom.setNumber(numberRoom);
+            hotelRoomManager.save(hotelRoom);
         }
-        roomDOA.save(r);
+        numberRoomDOA.save(numberRoom);
     }
+    
 }

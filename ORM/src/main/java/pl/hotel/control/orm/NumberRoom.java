@@ -57,7 +57,7 @@ public class NumberRoom implements Serializable {
         return hotelRooms;
     }
 
-    public void setHottelRooms(Set<HotelRoom> hottelRooms) {
+    public void setHottelRooms(Set<HotelRoom> hotelRooms) {
         this.hotelRooms = hotelRooms;
     }
 

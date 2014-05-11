@@ -9,6 +9,7 @@ package pl.hotel.control.database.connector.service;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import pl.hotel.control.database.connector.doa.ReservationDOA;
 import pl.hotel.control.database.connector.doa.ReservationDOAImpl;
 import pl.hotel.control.orm.Reservation;
@@ -29,9 +30,9 @@ public class ReservationManager {
      @Autowired
      private ReservationDOA reservationDOA; 
      
-     
+     @Transactional
      public void save(Reservation r){
-         
+         reservationDOA.save(r);
      }
      
     

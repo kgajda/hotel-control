@@ -56,7 +56,7 @@ public class Admin {
     @RequestMapping(value = {"/user/{username}"}, method = RequestMethod.GET)
     public @ResponseBody
     Account getUser(@PathVariable String username) {
-        Account account = accountManager.findByName(username);
+        Account account = accountManager.findByLogin(username);
         return account;
     }
     @RequestMapping(value = {"/user/{username}"}, method = RequestMethod.DELETE)

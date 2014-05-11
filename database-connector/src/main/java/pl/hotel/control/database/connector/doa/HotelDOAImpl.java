@@ -22,8 +22,7 @@ public class HotelDOAImpl extends CustomHibernateDaoSupport implements HotelDOA 
     @Transactional
     @Override
     public void save(Hotel hotel) {
-       
-        getSessionFactory().getCurrentSession().save(hotel);
+        getSessionFactory().getCurrentSession().saveOrUpdate(hotel);
     }
 
     @Transactional

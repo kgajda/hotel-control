@@ -7,9 +7,11 @@ package pl.hotel.control.database.connector.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import pl.hotel.control.database.connector.doa.HotelRoomDOA;
 import pl.hotel.control.database.connector.doa.RoomDOA;
-import pl.hotel.control.database.connector.doa.RoomDOAImpl;
 import pl.hotel.control.orm.HotelRoom;
+import pl.hotel.control.orm.Reservation;
 import pl.hotel.control.orm.Room;
 
 /**
@@ -17,18 +19,20 @@ import pl.hotel.control.orm.Room;
  * @author karol
  */
 @Service
-public class RoomManager {
+public class HotelRoomManager {
 
     @Autowired
-    private RoomDOA roomDOA;
+    private HotelRoomDOA roomDOA;
     @Autowired
-    private HotelRoomManager hotelRoomManager;
+    private ReservationManager reservationManager;
 
-    public void save(Room r) {
-        for (HotelRoom object : r.getHotelRooms()) {
-            object.setRoom(r);
-            hotelRoomManager.save(object);
+    @Transactional
+    public void save(HotelRoom r) {
+        for (Reservation reservation : r.getReservations()) {
+            reservation.setHottelroom(r);
+            reservationManager.save(reservation);
         }
         roomDOA.save(r);
     }
+
 }

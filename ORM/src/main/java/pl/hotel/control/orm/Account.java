@@ -22,9 +22,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
- * ORM - Obsłyga tabeli ACCOUNT
- * 1:1 UserInfo
- * 1:N Reservation
+ * ORM - Obsłyga tabeli ACCOUNT 1:1 UserInfo 1:N Reservation
+ *
  * @author karol
  */
 @Entity
@@ -35,14 +34,28 @@ public class Account implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ACCOUNT_ID", nullable = false, unique = true)
     private Integer id;
+    /**
+     * Login
+     */
     @Column(name = "LOGIN", length = 30, nullable = false, unique = true)
     private String login;
+    /**
+     * Hasło TODO: Zdobić w Hash
+     */
     @Column(name = "PASSWORD", length = 30, nullable = false)
     private String password;
+    /**
+     * Email uzytkownika
+     */
     @Column(name = "EMAIL", length = 30, nullable = false)
     private String email;
-    @Column(name = "ACTIVE", length = 1, nullable = false)
-    private boolean active;
+    /**
+     * Czy konto jest aktywne czy zablokowane
+     */
+    @Column(name = "STATUS", length = 1, nullable = false)
+    private Status status;
+    @Column(name = "ROLE_ACCOUNT", length = 10, nullable = false)
+    private Role role_account;
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private UserInfo userInfo;
     @OneToMany(mappedBy = "account", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -51,11 +64,12 @@ public class Account implements Serializable {
     public Account() {
     }
 
-    public Account(String login, String password, String email, boolean active) {
+    public Account(String login, String password, String email, Status status, Role role_account) {
         this.login = login;
         this.password = password;
         this.email = email;
-        this.active = active;
+        this.status = status;
+        this.role_account = role_account;
     }
 
     public Integer getId() {
@@ -90,12 +104,12 @@ public class Account implements Serializable {
         this.email = email;
     }
 
-    public boolean isActive() {
-        return active;
+    public Status getStatus() {
+        return status;
     }
 
-    public void setActive(boolean active) {
-        this.active = active;
+    public void setStatus(Status status) {
+        this.status = status;
     }
 
     public UserInfo getUserInfo() {
@@ -114,18 +128,24 @@ public class Account implements Serializable {
         this.stockDailyRecords = stockDailyRecords;
     }
 
+    public Role getRole_account() {
+        return role_account;
+    }
+
+    public void setRole_account(Role role_account) {
+        this.role_account = role_account;
+    }
+
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
-        builder.append("ID: "+id);
-        builder.append("Login: "+ login);
-        if(userInfo !=null){
+        builder.append("ID: " + id);
+        builder.append("Login: " + login);
+        if (userInfo != null) {
             builder.append("UserInfo: ");
             builder.append(userInfo.toString());
         }
         return builder.toString();
     }
-    
-    
 
 }

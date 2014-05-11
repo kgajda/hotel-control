@@ -14,10 +14,25 @@ import pl.hotel.control.orm.Account;
  */
 public interface AccountDOA {
 
+    /**
+     * Zapisuje nowe konto
+     *
+     * @param account
+     */
     void save(Account account);
 
+    /**
+     * Update Account
+     *
+     * @param account
+     */
     void update(Account account);
 
+    /**
+     * Usuwa konto z db
+     *
+     * @param account
+     */
     void delete(Account account);
 
     /**
@@ -27,7 +42,18 @@ public interface AccountDOA {
      * @return Account or Null
      */
     Account findByName(String name);
+    /**
+     * Wyszukuje konto na podstawie id
+     * @param id
+     * @return 
+     */
+    Account findById(String id);
 
+    /**
+     * Zwraca listę wszystkich kont zapisanych w db
+     *
+     * @return
+     */
     List<Account> getAllAccount();
 
 }

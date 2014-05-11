@@ -13,6 +13,9 @@ import pl.hotel.control.orm.HotelRoom;
  * @author karol
  */
 public interface HotelRoomDOA {
-    
+   /**
+    * Zapis nowego pokoju
+    * @param hotelRoom 
+    */
    void save(HotelRoom hotelRoom);
 }
