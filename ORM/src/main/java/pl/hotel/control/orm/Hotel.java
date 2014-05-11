@@ -40,7 +40,7 @@ public class Hotel implements Serializable {
     private String city;
 
     @OneToMany(mappedBy = "hotel", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private Set<HottelRoom> room = new HashSet<>();
+    private Set<HotelRoom> room = new HashSet<>();
 
     public Hotel() {
     }
@@ -65,11 +65,11 @@ public class Hotel implements Serializable {
         this.city = city;
     }
 
-    public Set<HottelRoom> getRoom() {
+    public Set<HotelRoom> getRoom() {
         return room;
     }
 
-    public void setRoom(Set<HottelRoom> room) {
+    public void setRoom(Set<HotelRoom> room) {
         this.room = room;
     }
 

@@ -47,7 +47,7 @@ public class Reservation implements Serializable {
     @JoinColumn(name = "ACCOUNT_ID")
     private Account account;
     @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
-    private HottelRoom hottelroom;
+    private HotelRoom hotelroom;
 
     public Reservation() {
     }
@@ -81,12 +81,12 @@ public class Reservation implements Serializable {
         this.date_to = date_to;
     }
 
-    public HottelRoom getHottelroom() {
-        return hottelroom;
+    public HotelRoom getHotelroom() {
+        return hotelroom;
     }
 
-    public void setHottelroom(HottelRoom hottelroom) {
-        this.hottelroom = hottelroom;
+    public void setHottelroom(HotelRoom hotelroom) {
+        this.hotelroom = hotelroom;
     }
 
 

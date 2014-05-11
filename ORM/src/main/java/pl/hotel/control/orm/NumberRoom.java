@@ -20,8 +20,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
- * 1:n hottelroom
- * n:1 reservation
+ * 1:n hottelroom n:1 reservation
+ *
  * @author karol
  */
 @Entity
@@ -36,7 +36,7 @@ public class NumberRoom implements Serializable {
     @Column(name = "NUMBER_ROOM")
     private String numberRoom;
     @OneToMany(mappedBy = "number", fetch = FetchType.EAGER)
-    private Set<HottelRoom> hottelRooms = new HashSet<>();
+    private Set<HotelRoom> hotelRooms = new HashSet<>();
 
     public NumberRoom() {
     }
@@ -53,12 +53,12 @@ public class NumberRoom implements Serializable {
         this.numberRoom = numberRoom;
     }
 
-    public Set<HottelRoom> getHottelRooms() {
-        return hottelRooms;
+    public Set<HotelRoom> getHottelRooms() {
+        return hotelRooms;
     }
 
-    public void setHottelRooms(Set<HottelRoom> hottelRooms) {
-        this.hottelRooms = hottelRooms;
+    public void setHottelRooms(Set<HotelRoom> hottelRooms) {
+        this.hotelRooms = hotelRooms;
     }
 
     public Integer getId() {

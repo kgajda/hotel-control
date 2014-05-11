@@ -17,7 +17,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -27,7 +26,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "HOTEL_ROOM")
-public class HottelRoom implements Serializable {
+public class HotelRoom implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,13 +39,13 @@ public class HottelRoom implements Serializable {
     @JoinColumn(name = "HOTEL_ID")
     private Hotel hotel;
 
-    @OneToMany(mappedBy = "hottelroom", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "hotelroom", fetch = FetchType.EAGER)
     private Set<Reservation> reservations = new HashSet<>();
 
-    public HottelRoom() {
+    public HotelRoom() {
     }
 
-    public HottelRoom(NumberRoom number, Hotel hotel) {
+    public HotelRoom(NumberRoom number, Hotel hotel) {
         this.number = number;
         this.hotel = hotel;
     }
