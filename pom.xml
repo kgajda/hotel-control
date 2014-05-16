@@ -18,9 +18,8 @@
     <modules>
         <module>database-connector</module>
         <module>Hotel-WebPage</module>
-    <module>Hotel_Client</module>
+        <module>Hotel_Client</module>
         <module>ORM</module>
-        <module>sender</module>
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
