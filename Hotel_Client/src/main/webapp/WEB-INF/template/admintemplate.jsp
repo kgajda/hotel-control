@@ -11,6 +11,7 @@
     </head>
     <body>
         <div class="page">
+            <tiles:insertAttribute name="adminmenu"/>
             <div class="content">
                 <tiles:insertAttribute name="menu" />
                 <tiles:insertAttribute name="body" />

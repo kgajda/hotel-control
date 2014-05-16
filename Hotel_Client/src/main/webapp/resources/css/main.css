@@ -34,6 +34,22 @@ body{
     margin:50px 10px 0px 250px;
 }
 
+ol {
+    list-style-type:none;
+    padding:0;
+    margin:0;
+    font-size:18px;
+    height:2em;
+    line-height:2em;
+    text-align:center;
+}
+
+ol > li {
+    float:left;
+    background-color:#FDD700;
+    width:150px;
+}
+
 .error{
     color: red;
     font-family: cursive;
