@@ -13,5 +13,6 @@ public class RestURI {
 
     public static final String ROOT_URI = "http://localhost:8084/serwer";
     public static final String REGISTRATION_URI = ROOT_URI + "/registion";
+    public static final String ADMIN_USERS_URI = ROOT_URI + "/admin/user";
 
 }

@@ -5,10 +5,12 @@
  */
 package pl.hotel.control.client;
 
+import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
@@ -81,4 +83,13 @@ public class DispatcherConfig extends WebMvcConfigurerAdapter {
         return new MappingJackson2HttpMessageConverter();
     }
 
+    @Bean
+    public RestTemplate rest() {
+        return new RestTemplate();
+    }
+    
+       @Bean
+    public ObjectMapper mapper(){
+        return new ObjectMapper();
+    }
 }

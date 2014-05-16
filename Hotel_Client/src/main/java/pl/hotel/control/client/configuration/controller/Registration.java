@@ -5,6 +5,8 @@
  */
 package pl.hotel.control.client.configuration.controller;
 
+import org.codehaus.jackson.map.ObjectMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -23,7 +25,10 @@ import pl.hotel.control.client.properties.RestURI;
 @RequestMapping("/registration")
 public class Registration {
 
-    RestTemplate rest = new RestTemplate();
+    @Autowired
+    private RestTemplate rest;
+    @Autowired
+    private ObjectMapper mapper;
 
     @RequestMapping(method = RequestMethod.GET)
     public String showPage(Model model) {
