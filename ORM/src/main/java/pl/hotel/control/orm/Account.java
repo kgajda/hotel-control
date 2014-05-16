@@ -59,7 +59,7 @@ public class Account implements Serializable {
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private UserInfo userInfo;
     @OneToMany(mappedBy = "account", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private Set<Reservation> stockDailyRecords = new HashSet<>(0);
+    private Set<Reservation> reservations = new HashSet<>(0);
 
     public Account() {
     }
@@ -121,11 +121,11 @@ public class Account implements Serializable {
     }
 
     public Set<Reservation> getStockDailyRecords() {
-        return stockDailyRecords;
+        return reservations;
     }
 
     public void setStockDailyRecords(Set<Reservation> stockDailyRecords) {
-        this.stockDailyRecords = stockDailyRecords;
+        this.reservations = stockDailyRecords;
     }
 
     public Role getRole_account() {

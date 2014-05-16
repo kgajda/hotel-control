@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pl.hotel.control.orm;
+package pl.hotel.control.Transport;
 
+import pl.hotel.control.orm.*;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
@@ -27,7 +28,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "HOTEL")
-public class Hotel implements Serializable {
+public class HotelModel implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -44,12 +45,12 @@ public class Hotel implements Serializable {
     private int stars;
 
     @OneToMany(mappedBy = "hotel", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private Set<HotelRoom> room = new HashSet<>();
+    private Set<HotelRoomModel> room = new HashSet<>();
 
-    public Hotel() {
+    public HotelModel() {
     }
 
-    public Hotel(String name, String city, int stars) {
+    public HotelModel(String name, String city, int stars) {
         this.name = name;
         this.city = city;
         this.stars = stars;
@@ -71,11 +72,11 @@ public class Hotel implements Serializable {
         this.city = city;
     }
 
-    public Set<HotelRoom> getRoom() {
+    public Set<HotelRoomModel> getRoom() {
         return room;
     }
 
-    public void setRoom(Set<HotelRoom> room) {
+    public void setRoom(Set<HotelRoomModel> room) {
         this.room = room;
     }
 

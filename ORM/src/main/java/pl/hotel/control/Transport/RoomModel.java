@@ -5,6 +5,7 @@
  */
 package pl.hotel.control.Transport;
 
+import pl.hotel.control.orm.*;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
@@ -24,53 +25,40 @@ import javax.persistence.Table;
  *
  * @author karol
  */
-public class Hotel implements Serializable {
+public class RoomModel{
+    private int id;
+    private int bed;
+    private int number;
 
-    private Integer id;
-
-    private String name;
-
-    private String city;
-
-    private Set<Integer> room = new HashSet<>();
-
-    public Hotel() {
+    public RoomModel() {
     }
 
-    public Hotel(String city) {
-        this.city = city;
+    public RoomModel( int bed, int number) {
+        this.bed = bed;
+        this.number = number;
     }
 
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public String getCity() {
-        return city;
+    public int getBed() {
+        return bed;
     }
 
-    public void setCity(String city) {
-        this.city = city;
+    public void setBed(int bed) {
+        this.bed = bed;
     }
 
-    public String getName() {
-        return name;
+    public int getNumber() {
+        return number;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNumber(int number) {
+        this.number = number;
     }
-
-    public Set<Integer> getRoom() {
-        return room;
-    }
-
-    public void setRoom(Set<Integer> room) {
-        this.room = room;
-    }
-
 }

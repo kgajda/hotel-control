@@ -6,6 +6,7 @@
 package pl.hotel.control.hotel.webpage.controllers;
 
 import java.io.IOException;
+import java.util.LinkedList;
 import java.util.List;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,7 @@ import pl.hotel.control.orm.Account;
 import pl.hotel.control.orm.Hotel;
 import pl.hotel.control.database.connector.service.AccountManager;
 import pl.hotel.control.database.connector.service.HotelManager;
-import pl.hotel.control.transport.User;
+import pl.hotel.control.Transport.*;
 
 /**
  *
@@ -40,24 +41,37 @@ public class Admin {
 
     @RequestMapping(value = {"/user"}, method = RequestMethod.GET)
     public @ResponseBody
-    List<Account> getAllUser() {
+    List<AccountModel> getAllUser() {
         List<Account> accountList = accountManager.getAllAccount();
-
-        return accountList;
+        List<AccountModel> accountModels = new LinkedList<>();
+        for (Account account : accountList) {
+            AccountModel model = new AccountModel();
+            model.setEmail(account.getEmail());
+            model.setId(account.getId());
+            model.setLogin(account.getLogin());
+            model.setRole_account(account.getRole_account());
+            model.setStatus(account.getStatus());
+            accountModels.add(model);
+        }
+        return accountModels;
     }
 
-    @RequestMapping(value = {"/user"}, method = RequestMethod.PUT)
-    public ResponseEntity<String> updateUser(@RequestBody String user) throws IOException {
-        Account u = mapper.readValue(user, Account.class);
-        accountManager.update(u);
+    @RequestMapping(value = {"/user/{username}"}, method = RequestMethod.PUT)
+    public ResponseEntity<String> updateUser(@PathVariable String login,@RequestBody String user) throws IOException {
+        AccountModel u = mapper.readValue(user, AccountModel.class);
+        Account account = accountManager.findByLogin(login);
+        account.setRole_account(u.getRole_account());
+        account.setStatus(u.getStatus());
         return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }
 
     @RequestMapping(value = {"/user/{username}"}, method = RequestMethod.GET)
     public @ResponseBody
-    Account getUser(@PathVariable String username) {
+    AccountModel getUser(@PathVariable String username) {
         Account account = accountManager.findByLogin(username);
-        return account;
+        AccountModel model = new AccountModel();
+        model.setEmail(model.getEmail());
+        return model;
     }
     @RequestMapping(value = {"/user/{username}"}, method = RequestMethod.DELETE)
     public @ResponseBody

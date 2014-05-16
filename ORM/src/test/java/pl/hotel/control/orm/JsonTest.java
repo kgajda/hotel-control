@@ -51,9 +51,9 @@ public class JsonTest {
         Hotel hotel = new Hotel();
         hotel.setCity("Kraków");
         hotel.setName("Jedynka");
-        Room room1 = new Room(4, 1, 1);
-        Room room2 = new Room(4, 1, 2);
-        Room room3 = new Room(4, 1, 3);
+        Room room1 = new Room(4, 1);
+        Room room2 = new Room(4, 1);
+        Room room3 = new Room(4, 1);
 //        hotel.getRoom().add(room3);
 //        hotel.getRoom().add(room1);
 //        hotel.getRoom().add(room2);

@@ -5,7 +5,6 @@
  */
 package pl.hotel.control.Transport;
 
-import pl.hotel.control.orm.*;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,33 +17,21 @@ import javax.persistence.Table;
  *
  * @author karol
  */
-@Entity
-@Table(name = "USER_INFO")
-public class UserInfo implements Serializable {
+public class UserInfoModel implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "USER_INFO_ID", unique = true)
     private Integer id;
-    @Column(name = "NAME", length = 20, nullable = false)
     private String name;
-    @Column(name = "SOUR_NAME", length = 20, nullable = false)
     private String sourName;
-    @Column(name = "ADRESS", length = 50, nullable = false)
     private String adress;
-    @Column(name = "ROLE_ACCOUNT", length = 10, nullable = false)
-    private String role_account;
-    @Column(name = "PHONE", length = 9, nullable = false)
     private int phone;
 
-    public UserInfo() {
+    public UserInfoModel() {
     }
 
-    public UserInfo(String name, String sourName, String adress, String role, int phone) {
+    public UserInfoModel(String name, String sourName, String adress, int phone) {
         this.name = name;
         this.sourName = sourName;
         this.adress = adress;
-        this.role_account = role;
         this.phone = phone;
     }
 
@@ -80,14 +67,6 @@ public class UserInfo implements Serializable {
         this.adress = adress;
     }
 
-    public String getRole() {
-        return role_account;
-    }
-
-    public void setRole(String role) {
-        this.role_account = role;
-    }
-
     public int getPhone() {
         return phone;
     }
@@ -96,15 +75,5 @@ public class UserInfo implements Serializable {
         this.phone = phone;
     }
 
-    @Override
-    public String toString() {
-        StringBuilder builder = new StringBuilder();
-        builder.append("ID: " + id);
-        builder.append("Name: " + name);
-        builder.append("Sourname: " + sourName);
-        builder.append("Address: " + adress);
-        builder.append("Type: " + role_account);
-        return builder.toString();
-    }
 
 }

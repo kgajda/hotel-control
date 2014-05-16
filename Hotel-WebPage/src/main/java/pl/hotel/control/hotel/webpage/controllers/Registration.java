@@ -19,9 +19,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import pl.hotel.control.Transport.AccountModel;
 import pl.hotel.control.orm.Account;
 import pl.hotel.control.orm.UserInfo;
 import pl.hotel.control.database.connector.service.AccountManager;
+import pl.hotel.control.orm.Role;
+import pl.hotel.control.orm.Status;
 import pl.hotel.control.transport.RegisterModel;
 
 /**
@@ -40,8 +43,9 @@ public class Registration {
     @RequestMapping(method = RequestMethod.POST)
     @ResponseBody
     public ResponseEntity<String> registion(@RequestBody String json) throws IOException {
-        Account register = mapper.readValue(json, Account.class);
-        accountManager.save(register);
+        AccountModel register = mapper.readValue(json, AccountModel.class);
+        Account account = new Account(register.getLogin(), register.getPassword(), register.getEmail(), Status.BLOCK, Role.USER);
+        accountManager.save(account);
         return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }
 }

@@ -33,8 +33,7 @@ public class Room implements Serializable {
     @Column(name = "ROOM_ID", nullable = false, unique = true)
     private int id;
 
-    @Column(name = "Stars")
-    private int stars;
+    
     @Column(name = "BED")
     private int bed;
     @Column(name = "NUMBER")
@@ -46,8 +45,7 @@ public class Room implements Serializable {
     public Room() {
     }
 
-    public Room(int stars, int bed, int number) {
-        this.stars = stars;
+    public Room( int bed, int number) {
         this.bed = bed;
         this.number = number;
     }
@@ -58,14 +56,6 @@ public class Room implements Serializable {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public int getStars() {
-        return stars;
-    }
-
-    public void setStars(int stars) {
-        this.stars = stars;
     }
 
     public int getBed() {

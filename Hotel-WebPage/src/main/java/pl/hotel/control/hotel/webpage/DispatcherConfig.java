@@ -20,7 +20,7 @@ import pl.hotel.control.database.connector.SpringConfigDb;
  */
 @Configuration
 @EnableWebMvc
-@ComponentScan("pl.hotel.control.hotel.webpage")
+@ComponentScan(basePackages = {"pl.hotel.control.hotel.webpage","pl.hotel.control.convert.transport"})
 @Import(SpringConfigDb.class)
 public class DispatcherConfig extends WebMvcConfigurerAdapter{
 
