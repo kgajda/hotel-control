@@ -23,15 +23,15 @@ public class UserInfo implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "USER_INFO_ID", unique = true)
+    @Column(name = "USER_INFO_ID")
     private Integer id;
-    @Column(name = "NAME", length = 20, nullable = false)
+    @Column(name = "NAME")
     private String name;
-    @Column(name = "SOUR_NAME", length = 20, nullable = false)
+    @Column(name = "SOUR_NAME")
     private String sourName;
-    @Column(name = "ADRESS", length = 50, nullable = false)
+    @Column(name = "ADRESS")
     private String adress;
-    @Column(name = "PHONE", length = 9, nullable = false)
+    @Column(name = "PHONE")
     private int phone;
 
     public UserInfo() {

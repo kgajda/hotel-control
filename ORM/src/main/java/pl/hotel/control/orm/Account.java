@@ -32,32 +32,32 @@ public class Account implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ACCOUNT_ID", nullable = false, unique = true)
+    @Column(name = "ACCOUNT_ID")
     private Integer id;
     /**
      * Login
      */
-    @Column(name = "LOGIN", length = 30, nullable = false, unique = true)
+    @Column(name = "LOGIN")
     private String login;
     /**
      * Hasło TODO: Zdobić w Hash
      */
-    @Column(name = "PASSWORD", length = 30, nullable = false)
+    @Column(name = "PASSWORD")
     private String password;
     /**
      * Email uzytkownika
      */
-    @Column(name = "EMAIL", length = 30, nullable = false)
+    @Column(name = "EMAIL")
     private String email;
     /**
      * Czy konto jest aktywne czy zablokowane
      */
-    @Column(name = "STATUS", length = 1, nullable = false)
+    @Column(name = "STATUS")
     private Status status;
-    @Column(name = "ROLE_ACCOUNT", length = 10, nullable = false)
+    @Column(name = "ROLE_ACCOUNT")
     private Role role_account;
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private UserInfo userInfo;
+    private UserInfo userInfo = new UserInfo();
     @OneToMany(mappedBy = "account", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<Reservation> reservations = new HashSet<>(0);
 

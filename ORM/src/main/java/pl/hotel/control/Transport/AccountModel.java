@@ -35,11 +35,11 @@ public class AccountModel {
     /**
      * Czy konto jest aktywne czy zablokowane
      */
-    private Status status;
+    private String status;
     /**
      * Typ użytkownika
      */
-    private Role role_account;
+    private String role_account;
     /**
      * Id user info
      */
@@ -62,12 +62,11 @@ public class AccountModel {
         this.email = email;
     }
 
-    public AccountModel(Integer id, String login, String password, String email, Status status, Role role_account, Integer userInfo) {
+    public AccountModel(Integer id, String login, String password, String email, String status, String role_account, Integer userInfo) {
         this(login, password, email);
         this.id = id;
         this.status = status;
         this.role_account = role_account;
-        this.userInfoID = userInfoID;
     }
 
     public Integer getId() {
@@ -102,19 +101,19 @@ public class AccountModel {
         this.email = email;
     }
 
-    public Status getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(Status status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 
-    public Role getRole_account() {
+    public String getRole_account() {
         return role_account;
     }
 
-    public void setRole_account(Role role_account) {
+    public void setRole_account(String role_account) {
         this.role_account = role_account;
     }
 
@@ -134,7 +133,6 @@ public class AccountModel {
         this.userInfo = userInfo;
     }
 
-   
     public List<Integer> getReservations() {
         return reservations;
     }

@@ -6,17 +6,24 @@
 package pl.hotel.control.client.configuration.controller;
 
 import java.io.IOException;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.client.RestTemplate;
 import pl.hotel.control.Transport.AccountModel;
+import pl.hotel.control.Transport.UserInfoModel;
+import pl.hotel.control.client.properties.Properties;
 import pl.hotel.control.client.properties.RestURI;
+import pl.hotel.control.orm.UserInfo;
 
 /**
  *
@@ -41,6 +48,27 @@ public class Admin {
         List<AccountModel> accounts = mapper.readValue(response, List.class);
         model.addAttribute("accountlist", accounts);
         return "accountlist";
+    }
+
+    @RequestMapping(value = {"/admin/account/{user}"}, method = RequestMethod.GET)
+    public String showAccount(Model model, @PathVariable String user) throws IOException {
+        String response = restTemplate.getForObject(RestURI.getUser(user), String.class);
+        AccountModel accounts = mapper.readValue(response, AccountModel.class);
+        System.out.println("*************************");
+        System.out.println(response);
+        model.addAttribute("accountModel", accounts);
+        model.addAttribute("status", Properties.getStatus());
+        model.addAttribute("role", Properties.getRole());
+        return "account";
+    }
+
+    @RequestMapping(value = {"/admin/account/{user}"}, method = RequestMethod.POST)
+    public String upDateAccount(Model model, @PathVariable String user, AccountModel accountModel) throws IOException {
+        restTemplate.put(RestURI.getUser(user), accountModel);
+//        model.addAttribute("accountModel", accountModel);
+//        model.addAttribute("status", Properties.getStatus());
+//        model.addAttribute("role", Properties.getRole());
+        return showAccount(model, user);
     }
 
     @RequestMapping(value = {"/admin/hotel"}, method = RequestMethod.GET)

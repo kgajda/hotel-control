@@ -12,6 +12,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.hotel.control.database.connector.doa.AccountDOA;
 import pl.hotel.control.database.connector.doa.ReservationDOA;
+import pl.hotel.control.database.connector.doa.UserInfo;
+import pl.hotel.control.database.connector.doa.UserInfoDOAImpl;
 import pl.hotel.control.orm.Account;
 import pl.hotel.control.orm.Reservation;
 
@@ -26,7 +28,8 @@ public class AccountManager {
     private AccountDOA accountDOA;
     @Autowired
     private ReservationDOA reservationManager;
-
+    @Autowired
+    private UserInfo userInfoDOAImpl;
     private final static Logger LOGGER = Logger.getLogger(AccountManager.class);
 
     @Transactional
@@ -35,6 +38,7 @@ public class AccountManager {
             reservation.setAccount(stock);
             reservationManager.save(reservation);
         }
+        userInfoDOAImpl.save(stock.getUserInfo());
         accountDOA.save(stock);
         LOGGER.info("SAVE ACCOUNT: " + stock.toString());
     }

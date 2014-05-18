@@ -15,4 +15,8 @@ public class RestURI {
     public static final String REGISTRATION_URI = ROOT_URI + "/registion";
     public static final String ADMIN_USERS_URI = ROOT_URI + "/admin/user";
 
+    public static String getUser(String user) {
+        return ADMIN_USERS_URI + "/" + user;
+    }
+
 }

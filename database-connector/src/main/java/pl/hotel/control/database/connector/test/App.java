@@ -30,7 +30,6 @@ public class App {
     public static void main(String[] args) {
         ApplicationContext ac = new AnnotationConfigApplicationContext(SpringConfigDb.class);
         AccountManager accountManager = ac.getBean(AccountManager.class);
-        
     }
     
 }

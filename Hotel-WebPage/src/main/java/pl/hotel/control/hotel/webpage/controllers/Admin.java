@@ -23,6 +23,8 @@ import pl.hotel.control.orm.Hotel;
 import pl.hotel.control.database.connector.service.AccountManager;
 import pl.hotel.control.database.connector.service.HotelManager;
 import pl.hotel.control.Transport.*;
+import pl.hotel.control.orm.Role;
+import pl.hotel.control.orm.Status;
 
 /**
  *
@@ -49,19 +51,20 @@ public class Admin {
             model.setEmail(account.getEmail());
             model.setId(account.getId());
             model.setLogin(account.getLogin());
-            model.setRole_account(account.getRole_account());
-            model.setStatus(account.getStatus());
+            model.setRole_account(account.getRole_account().name());
+            model.setStatus(account.getStatus().toString());
             accountModels.add(model);
         }
         return accountModels;
     }
 
     @RequestMapping(value = {"/user/{username}"}, method = RequestMethod.PUT)
-    public ResponseEntity<String> updateUser(@PathVariable String login,@RequestBody String user) throws IOException {
+    public ResponseEntity<String> updateUser(@PathVariable String username, @RequestBody String user) throws IOException {
         AccountModel u = mapper.readValue(user, AccountModel.class);
-        Account account = accountManager.findByLogin(login);
-        account.setRole_account(u.getRole_account());
-        account.setStatus(u.getStatus());
+        Account account = accountManager.findByLogin(username);
+        account.setStatus(Status.valueOf(u.getStatus()));
+        account.setRole_account(Role.valueOf(u.getRole_account()));
+        accountManager.update(account);
         return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }
 
@@ -70,13 +73,21 @@ public class Admin {
     AccountModel getUser(@PathVariable String username) {
         Account account = accountManager.findByLogin(username);
         AccountModel model = new AccountModel();
-        model.setEmail(model.getEmail());
+        model.setEmail(account.getEmail());
+        model.setLogin(account.getLogin());
+        model.setId(account.getId());
+        model.setStatus(account.getStatus().toString());
+        model.setRole_account(account.getRole_account().name());
+        //TODO: ŁANIE NULL!!!
+        UserInfoModel infoModel = new UserInfoModel(account.getUserInfo().getName(), account.getUserInfo().getSourName(), account.getUserInfo().getAdress(), account.getUserInfo().getPhone());
+        model.setUserInfo(infoModel);
         return model;
     }
+
     @RequestMapping(value = {"/user/{username}"}, method = RequestMethod.DELETE)
     public @ResponseBody
     ResponseEntity<String> deleteUser(@PathVariable String username) {
-       accountManager.delete(username);
+        accountManager.delete(username);
         return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }
 

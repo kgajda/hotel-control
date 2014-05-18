@@ -1,8 +1,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <div class="adminmenu">
-    <ol>
-        <ul>
-            <li >
+    <ul>
+        <li >
             <spring:url value="/admin/account" var="homeUrl" htmlEscape="true"/>
             <a class="button" href="${homeUrl}">Users</a>
         </li>
@@ -14,6 +13,6 @@
             <spring:url value="/admin/reservation" var="aboutUrl" htmlEscape="true"/>
             <a class="button" href="${aboutUrl}">Reservation</a>
         </li>
-        </ul>
-    </ol>
+    </ul>
+
 </div>

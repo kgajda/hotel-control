@@ -43,8 +43,13 @@ public class Registration {
     @RequestMapping(method = RequestMethod.POST)
     @ResponseBody
     public ResponseEntity<String> registion(@RequestBody String json) throws IOException {
+        System.out.println(json);
         AccountModel register = mapper.readValue(json, AccountModel.class);
         Account account = new Account(register.getLogin(), register.getPassword(), register.getEmail(), Status.BLOCK, Role.USER);
+        account.getUserInfo().setName(register.getUserInfo().getName());
+        account.getUserInfo().setSourName(register.getUserInfo().getSourName());
+        account.getUserInfo().setPhone(register.getUserInfo().getPhone());
+        account.getUserInfo().setAdress(register.getUserInfo().getAdress());
         accountManager.save(account);
         return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }
