@@ -26,26 +26,19 @@ import javax.persistence.Table;
  *
  * @author karol
  */
-@Entity
-@Table(name = "HOTEL")
 public class HotelModel implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "HOTEL_ID", nullable = false, unique = true)
     private Integer id;
 
-    @Column(name = "NAME")
     private String name;
 
-    @Column(name = "CITY")
     private String city;
 
-    @Column(name = "Stars")
     private int stars;
 
-    @OneToMany(mappedBy = "hotel", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<HotelRoomModel> room = new HashSet<>();
+
+    private Integer rooms;
 
     public HotelModel() {
     }
@@ -96,15 +89,12 @@ public class HotelModel implements Serializable {
         this.stars = stars;
     }
 
-    @Override
-    public String toString() {
-        StringBuilder builder = new StringBuilder();
-        builder.append("ID: " + id);
-        builder.append("Name: " + name);
-        builder.append("City: " + city);
-        builder.append("Stars: "+ stars);
-        builder.append("Ilość pokoi" + Integer.toString(room.size()));
-        return builder.toString();
+    public Integer getRooms() {
+        return rooms;
+    }
+
+    public void setRooms(Integer rooms) {
+        this.rooms = rooms;
     }
 
 }

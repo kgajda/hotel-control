@@ -11,6 +11,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
@@ -87,9 +88,9 @@ public class DispatcherConfig extends WebMvcConfigurerAdapter {
     public RestTemplate rest() {
         return new RestTemplate();
     }
-    
-       @Bean
-    public ObjectMapper mapper(){
+
+    @Bean
+    public ObjectMapper mapper() {
         return new ObjectMapper();
     }
 }

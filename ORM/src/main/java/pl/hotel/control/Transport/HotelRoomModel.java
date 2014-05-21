@@ -8,19 +8,25 @@ package pl.hotel.control.Transport;
 import java.util.LinkedList;
 import java.util.List;
 
-
 /**
  * 1:n ROOMNUMBER 1:n Hotel
  *
  * @author karol
  */
-public class HotelRoomModel{
+public class HotelRoomModel {
+
     private Integer id;
     private Integer number;
     private RoomModel room;
+    private Integer stars;
     private List<Integer> reservations = new LinkedList<>();
 
     public HotelRoomModel() {
+    }
+
+    public HotelRoomModel(Integer number, RoomModel room) {
+        this.number = number;
+        this.room = room;
     }
 
     public Integer getId() {
@@ -55,5 +61,12 @@ public class HotelRoomModel{
         this.reservations = reservations;
     }
 
-    
+    public Integer getStars() {
+        return stars;
+    }
+
+    public void setStars(Integer stars) {
+        this.stars = stars;
+    }
+
 }

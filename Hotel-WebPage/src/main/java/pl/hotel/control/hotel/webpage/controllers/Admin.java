@@ -23,7 +23,10 @@ import pl.hotel.control.orm.Hotel;
 import pl.hotel.control.database.connector.service.AccountManager;
 import pl.hotel.control.database.connector.service.HotelManager;
 import pl.hotel.control.Transport.*;
+import pl.hotel.control.orm.HotelRoom;
+import pl.hotel.control.orm.NumberRoom;
 import pl.hotel.control.orm.Role;
+import pl.hotel.control.orm.Room;
 import pl.hotel.control.orm.Status;
 
 /**
@@ -78,7 +81,6 @@ public class Admin {
         model.setId(account.getId());
         model.setStatus(account.getStatus().toString());
         model.setRole_account(account.getRole_account().name());
-        //TODO: ŁANIE NULL!!!
         UserInfoModel infoModel = new UserInfoModel(account.getUserInfo().getName(), account.getUserInfo().getSourName(), account.getUserInfo().getAdress(), account.getUserInfo().getPhone());
         model.setUserInfo(infoModel);
         return model;
@@ -91,10 +93,11 @@ public class Admin {
         return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }
 
-    @RequestMapping(value = {"/hotel"}, method = RequestMethod.POST, consumes = "application/json")
+    @RequestMapping(value = {"/hotel"}, method = RequestMethod.POST)
     public ResponseEntity<String> newHotel(@RequestBody String json) throws IOException {
-        Hotel hotel = mapper.readValue(json, Hotel.class);
-        hotelManager.save(hotel);
+        HotelModel hotelModel = mapper.readValue(json, HotelModel.class);
+        Hotel newHotel = new Hotel(hotelModel.getName(), hotelModel.getCity(), hotelModel.getStars());
+        hotelManager.save(newHotel);
         return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }
 

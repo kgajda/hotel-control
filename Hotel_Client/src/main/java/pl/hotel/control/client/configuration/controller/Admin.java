@@ -18,8 +18,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.client.RestTemplate;
 import pl.hotel.control.Transport.AccountModel;
+import pl.hotel.control.Transport.HotelModel;
+import pl.hotel.control.Transport.HotelRoomModel;
+import pl.hotel.control.Transport.RoomModel;
 import pl.hotel.control.Transport.UserInfoModel;
 import pl.hotel.control.client.properties.Properties;
 import pl.hotel.control.client.properties.RestURI;
@@ -54,8 +58,6 @@ public class Admin {
     public String showAccount(Model model, @PathVariable String user) throws IOException {
         String response = restTemplate.getForObject(RestURI.getUser(user), String.class);
         AccountModel accounts = mapper.readValue(response, AccountModel.class);
-        System.out.println("*************************");
-        System.out.println(response);
         model.addAttribute("accountModel", accounts);
         model.addAttribute("status", Properties.getStatus());
         model.addAttribute("role", Properties.getRole());
@@ -65,19 +67,29 @@ public class Admin {
     @RequestMapping(value = {"/admin/account/{user}"}, method = RequestMethod.POST)
     public String upDateAccount(Model model, @PathVariable String user, AccountModel accountModel) throws IOException {
         restTemplate.put(RestURI.getUser(user), accountModel);
-//        model.addAttribute("accountModel", accountModel);
-//        model.addAttribute("status", Properties.getStatus());
-//        model.addAttribute("role", Properties.getRole());
         return showAccount(model, user);
     }
 
     @RequestMapping(value = {"/admin/hotel"}, method = RequestMethod.GET)
-    public String showHotel(Model model) {
-        return "admin";
+    public String showHotel(Model model) throws IOException {
+        String response = restTemplate.getForObject(RestURI.HOTELS_URI, String.class);
+        List hotelModelList = mapper.readValue(response, List.class);
+        model.addAttribute("hotelModelList", hotelModelList);
+        return "hotellist";
     }
 
-    @RequestMapping(value = {"/admin/reservation"}, method = RequestMethod.GET)
-    public String showReservation(Model model) {
-        return "admin";
+    @RequestMapping(value = {"/admin/hotel/new"}, method = RequestMethod.GET)
+    public String showRegistHotel(Model model) {
+        HotelModel hotelModel = new HotelModel();
+        model.addAttribute("hotelModel", hotelModel);
+        return "newHotel";
     }
+
+    @RequestMapping(value = {"/admin/hotel/new"},method = RequestMethod.POST)
+    public String addNewHotel(@ModelAttribute("hotelModel") HotelModel hotelmodel,Model model) throws IOException {
+        restTemplate.postForEntity(RestURI.ADMIN_HOTEL_URI, hotelmodel, ResponseEntity.class);
+
+        return showHotel(model);
+    }
+
 }
