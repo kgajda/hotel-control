@@ -17,16 +17,11 @@ public class HotelRoomModel {
 
     private Integer id;
     private Integer number;
-    private RoomModel room;
+    private int bed;
     private Integer stars;
     private List<Integer> reservations = new LinkedList<>();
 
     public HotelRoomModel() {
-    }
-
-    public HotelRoomModel(Integer number, RoomModel room) {
-        this.number = number;
-        this.room = room;
     }
 
     public Integer getId() {
@@ -45,14 +40,6 @@ public class HotelRoomModel {
         this.number = number;
     }
 
-    public pl.hotel.control.Transport.RoomModel getRoom() {
-        return room;
-    }
-
-    public void setRoom(pl.hotel.control.Transport.RoomModel room) {
-        this.room = room;
-    }
-
     public List<Integer> getReservations() {
         return reservations;
     }
@@ -67,6 +54,14 @@ public class HotelRoomModel {
 
     public void setStars(Integer stars) {
         this.stars = stars;
+    }
+
+    public int getBed() {
+        return bed;
+    }
+
+    public void setBed(int bed) {
+        this.bed = bed;
     }
 
 }

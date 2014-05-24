@@ -71,25 +71,48 @@ public class Admin {
     }
 
     @RequestMapping(value = {"/admin/hotel"}, method = RequestMethod.GET)
-    public String showHotel(Model model) throws IOException {
+    public String showHotels(Model model) throws IOException {
         String response = restTemplate.getForObject(RestURI.HOTELS_URI, String.class);
         List hotelModelList = mapper.readValue(response, List.class);
         model.addAttribute("hotelModelList", hotelModelList);
-        return "hotellist";
+        return "hotel/hotellist";
+    }
+
+    @RequestMapping(value = {"/admin/hotel/{id}"}, method = RequestMethod.GET)
+    public String showHotel(@PathVariable String id, Model model) throws IOException {
+        String response = restTemplate.getForObject(RestURI.getHotel(id), String.class);
+        HotelModel hotelModelList = mapper.readValue(response, HotelModel.class);
+        model.addAttribute("hotelModel", hotelModelList);
+        return "hotel/hotelinfo";
     }
 
     @RequestMapping(value = {"/admin/hotel/new"}, method = RequestMethod.GET)
     public String showRegistHotel(Model model) {
         HotelModel hotelModel = new HotelModel();
         model.addAttribute("hotelModel", hotelModel);
-        return "newHotel";
+        return "hotel/newHotel";
     }
 
-    @RequestMapping(value = {"/admin/hotel/new"},method = RequestMethod.POST)
-    public String addNewHotel(@ModelAttribute("hotelModel") HotelModel hotelmodel,Model model) throws IOException {
+    @RequestMapping(value = {"/admin/hotel/new"}, method = RequestMethod.POST)
+    public String addNewHotel(@ModelAttribute("hotelModel") HotelModel hotelmodel, Model model) throws IOException {
         restTemplate.postForEntity(RestURI.ADMIN_HOTEL_URI, hotelmodel, ResponseEntity.class);
 
-        return showHotel(model);
+        return showHotels(model);
     }
 
+    @RequestMapping(value = {"/admin/hotel/{id}/room"}, method = RequestMethod.GET)
+    public String showRegistHotelRoom(@PathVariable String id, Model model) {
+        HotelRoomModel roomModel = new HotelRoomModel();
+        model.addAttribute("roomModel", roomModel);
+        return "hotel/newroom";
+    }
+
+    @RequestMapping(value = {"/admin/hotel/{id}/room"}, method = RequestMethod.POST)
+    public String registHotelRoom(@PathVariable String id, Model model, HotelRoomModel roomModel) throws IOException {
+        String response = restTemplate.getForObject(RestURI.getHotel(id), String.class);
+        HotelModel hotelModel = mapper.readValue(response, HotelModel.class);
+        hotelModel.getRoom().add(roomModel);
+        restTemplate.put(RestURI.getHotel(id), hotelModel);
+        return showHotel(id,model);
+    }
 }

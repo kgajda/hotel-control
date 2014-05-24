@@ -19,7 +19,7 @@ public class HotelRoomDOAImpl extends CustomHibernateDaoSupport implements Hotel
     @Transactional
     @Override
     public void save(HotelRoom hotelRoom) {
-        getSessionFactory().getCurrentSession().save(hotelRoom);
+        getSessionFactory().getCurrentSession().saveOrUpdate(hotelRoom);
     }
     
 }

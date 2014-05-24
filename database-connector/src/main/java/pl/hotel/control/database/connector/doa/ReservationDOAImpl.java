@@ -19,7 +19,7 @@ public class ReservationDOAImpl extends CustomHibernateDaoSupport implements Res
     @Transactional
     @Override
     public void save(Reservation r) {
-        getSessionFactory().getCurrentSession().save(r);
+        getSessionFactory().getCurrentSession().saveOrUpdate(r);
     }
 
     @Transactional

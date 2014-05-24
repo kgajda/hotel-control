@@ -48,6 +48,15 @@ public class HotelDOAImpl extends CustomHibernateDaoSupport implements HotelDOA 
 
     @Transactional
     @Override
+    public Hotel findById(Integer id) {
+        List list = getHibernateTemplate().find(
+                "from Hotel where id=?", id
+        );
+        return (Hotel) list.get(0);
+    }
+
+    @Transactional
+    @Override
     public List<Hotel> getAllHotels() {
         List<Hotel> hotels = getSessionFactory().getCurrentSession().createCriteria(Hotel.class).list();
         return hotels;

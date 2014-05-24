@@ -11,6 +11,7 @@ import pl.hotel.control.orm.Hotel;
 
 /**
  * Dostęp do DB
+ *
  * @author karol
  */
 public interface HotelDOA {
@@ -43,6 +44,8 @@ public interface HotelDOA {
      * @return
      */
     Hotel findByName(String name);
+
+    Hotel findById(Integer name);
 
     /**
      * Listowanie hoteli

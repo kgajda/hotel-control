@@ -19,7 +19,7 @@ public class NumberRoomDOAImpl extends CustomHibernateDaoSupport implements Numb
     @Transactional
     @Override
     public void save(NumberRoom numberRoom) {
-        getSessionFactory().getCurrentSession().save(numberRoom);
+        getSessionFactory().getCurrentSession().saveOrUpdate(numberRoom);
     }
 
 }

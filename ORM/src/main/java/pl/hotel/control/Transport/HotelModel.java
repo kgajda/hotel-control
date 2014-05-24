@@ -5,9 +5,10 @@
  */
 package pl.hotel.control.Transport;
 
-import pl.hotel.control.orm.*;
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -20,6 +21,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import pl.hotel.control.orm.*;
 
 /**
  * 1:n NumberROOM
@@ -36,7 +38,7 @@ public class HotelModel implements Serializable {
 
     private int stars;
 
-    private Set<HotelRoomModel> room = new HashSet<>();
+    private List<HotelRoomModel> room = new LinkedList<>();
 
     private Integer rooms;
 
@@ -65,11 +67,11 @@ public class HotelModel implements Serializable {
         this.city = city;
     }
 
-    public Set<HotelRoomModel> getRoom() {
+    public List<HotelRoomModel> getRoom() {
         return room;
     }
 
-    public void setRoom(Set<HotelRoomModel> room) {
+    public void setRoom(List<HotelRoomModel> room) {
         this.room = room;
     }
 

@@ -14,18 +14,18 @@
             </tr>
             <c:forEach items="${hotelModelList}" var="hotelModel">
                 <tr>
-                    <td><c:out value="${hotelModel.id}"/> </td>
                     <td>
-                        <spring:url value="hotel/${hotelModel.name}" var="aboutUrl" htmlEscape="true"/>
-                        <a class="button" href="${aboutUrl}"><c:out value="${hotelModel.name}"/> </a>
+                        <spring:url value="hotel/${hotelModel.id}" var="aboutUrl" htmlEscape="true"/>
+                        <a class="button" href="${aboutUrl}"><c:out value="${hotelModel.id}"/> </a>
                     </td>
+                    <td><c:out value="${hotelModel.name}"/> </td>
                     <td><c:out value="${hotelModel.city}"/> </td>
                     <td><c:out value="${hotelModel.stars}"/> </td>
                 </tr>
             </c:forEach>
                 <tr>
                     <td><spring:url value="hotel/new" var="aboutUrl" htmlEscape="true"/>
-                        <a class="button" href="${aboutUrl}"><c:out value="Registr new hotel"/> </a></td>
+                        <a class="button" href="${aboutUrl}"><c:out value="Registr new hotel"/></a></td>
                 </tr>    
         </table>
     </tiles:putAttribute>

@@ -101,4 +101,31 @@ public class Admin {
         return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }
 
+    @RequestMapping(value = {"/hotel/{id}"}, method = RequestMethod.GET)
+    public @ResponseBody
+    HotelModel getHotel(@PathVariable String id) throws IOException {
+        Hotel hotel = hotelManager.getHotel(Integer.parseInt(id));
+        HotelModel hotelModel = new HotelModel();
+        hotelModel.setCity(hotel.getCity());
+        hotelModel.setId(hotel.getId());
+        hotelModel.setName(hotel.getName());
+        hotelModel.setRooms(hotel.getRoom().size());
+        hotelModel.setStars(hotel.getStars());
+        List<HotelRoomModel> hotelRoomModels = new LinkedList<>();
+        for (HotelRoom hotelRoom : hotel.getRoom()) {
+            HotelRoomModel hotelRoomModel = new HotelRoomModel();
+            hotelRoomModel.setNumber(hotelRoom.getNumber().getId());
+            hotelRoomModel.setBed(hotelRoom.getRoom().getBed());
+        }
+        hotelModel.setRoom(hotelRoomModels);
+        return hotelModel;
+    }
+
+    @RequestMapping(value = {"/hotel/{id}"}, method = RequestMethod.PUT)
+    public ResponseEntity<String> getHotel(@PathVariable String id, @RequestBody String json) throws IOException {
+        HotelModel hotelModel = mapper.readValue(json, HotelModel.class);
+        Hotel hotel = hotelManager.getHotel(hotelModel.getId());
+        return new ResponseEntity<>(HttpStatus.ACCEPTED);
+    }
+
 }

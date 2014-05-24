@@ -20,5 +20,8 @@ public class RestURI {
     public static String getUser(String user) {
         return ADMIN_USERS_URI + "/" + user;
     }
+    public static String getHotel(String id) {
+        return ADMIN_HOTEL_URI + "/" + id;
+    }
 
 }
